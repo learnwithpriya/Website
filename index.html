@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,113 +12,262 @@
 
 <link rel="stylesheet" href="CSS.css">
 
+<script src="script.js" defer></script>
+
 </head>
+
 
 <body class="bg-gray-100 font-sans">
 
-<!-- HEADER -->
-<header class="bg-white shadow sticky top-0">
 
-<div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+<!-- HEADER -->
+
+<header id="main-header" class="bg-white shadow p-4 flex justify-between items-center">
 
 <div class="flex items-center gap-3">
 
-<div class="w-10 h-10 bg-red-500 text-white flex items-center justify-center rounded">
+<div class="w-10 h-10 bg-red-500 text-white flex items-center justify-center rounded font-bold">
 O
 </div>
 
-<h1 class="font-bold text-xl">
-OPTIKS MECHATRONICS
+<div>
+
+<h1 class="font-bold text-lg">
+OPTIKS
 </h1>
+
+<p class="text-xs text-blue-500">
+MECHATRONICS
+</p>
 
 </div>
 
-<nav class="flex gap-6 text-gray-600">
+</div>
+
+
+<nav class="space-x-6 hidden md:block">
+
 <a href="#home">Home</a>
 <a href="#products">Products</a>
 <a href="#contact">Contact</a>
+
 </nav>
 
-</div>
 
 </header>
 
+
 <!-- HERO -->
-<section id="home" class="text-center py-16 bg-white">
+
+<section id="home" class="text-center py-20 bg-white">
 
 <h1 class="text-4xl font-bold mb-4">
+
 Engineering the Future of Smart Lighting
+
 </h1>
 
 <p class="text-gray-600">
-IP66 & IK Protected Professional Lighting Systems
+
+Professional lighting solutions with IP66 and IK protection
+
 </p>
 
 </section>
 
-<!-- PRODUCT SECTION -->
 
-<section id="products" class="max-w-7xl mx-auto p-6">
+
+<!-- PRODUCTS -->
+
+<section id="products" class="max-w-6xl mx-auto p-6">
+
 
 <h2 class="text-3xl font-bold text-center mb-8">
 Our Lighting Products
 </h2>
 
-<input
-id="search"
-placeholder="Search product..."
-class="border p-3 w-full mb-8 rounded">
 
-<div
-id="product-grid"
+<input
+
+id="product-search"
+placeholder="Search products..."
+class="border p-3 w-full rounded mb-10"
+
+>
+
+
+<div id="loading" class="text-center py-6">
+
+Loading Products...
+
+</div>
+
+
+<div id="error" class="hidden text-center text-red-500">
+
+Unable to load products
+
+</div>
+
+
+<div id="no-results" class="hidden text-center text-gray-500">
+
+No products found
+
+</div>
+
+
+<div id="product-grid"
+
 class="grid md:grid-cols-3 gap-6">
 
 </div>
 
+
+<div id="product-count"
+
+class="text-center mt-8 text-gray-500">
+
+</div>
+
+
 </section>
+
+
 
 <!-- PRODUCT MODAL -->
 
 <div
-id="modal"
-class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
 
-<div class="bg-white p-6 rounded max-w-3xl w-full">
+id="product-modal"
+
+class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center"
+
+>
+
+<div class="bg-white max-w-4xl w-full p-6 rounded">
 
 <button
-onclick="closeModal()"
-class="float-right text-red-500">
+
+id="close-modal"
+
+class="text-red-500 float-right"
+
+>
+
 Close
+
 </button>
 
+
 <h2
-id="modal-name"
-class="text-2xl font-bold mb-3"></h2>
+
+id="modal-product-name"
+
+class="text-2xl font-bold mb-3"
+
+>
+
+</h2>
+
 
 <p
-id="modal-desc"
-class="mb-4"></p>
 
-<div
-id="modal-specs"
-class="space-y-2"></div>
+id="modal-product-description"
 
-</div>
+class="mb-6"
 
-</div>
+>
 
-<!-- FOOTER -->
-
-<footer id="contact" class="bg-white mt-16 p-6 text-center">
-
-<p class="text-gray-500">
-© 2026 Optiks Mechatronics
 </p>
 
-</footer>
 
-<!-- LOAD JAVASCRIPT -->
-<script src="script.js"></script>
+<div class="grid md:grid-cols-2 gap-8">
+
+
+<div>
+
+<h3 class="font-bold mb-4">
+Beam Angle Simulator
+</h3>
+
+<select
+
+id="beamSelect"
+
+class="border p-2 mb-4"
+
+onchange="simulateBeam()"
+
+>
+
+<option value="10">10°</option>
+<option value="20">20°</option>
+<option value="30">30°</option>
+<option value="60">60°</option>
+<option value="120">120°</option>
+
+</select>
+
+
+<canvas
+
+id="beamCanvas"
+
+width="300"
+
+height="300"
+
+class="border"
+
+></canvas>
+
+
+</div>
+
+
+
+<div>
+
+<h3 class="font-bold mb-4">
+
+Specifications
+
+</h3>
+
+<div id="modal-specifications"></div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="text-center py-20 bg-white">
+
+<h2 class="text-3xl font-bold mb-4">
+
+Contact Us
+
+</h2>
+
+<p>
+
+Optiks Mechatronics Lighting Technology
+
+</p>
+
+</section>
+
+
 
 </body>
+
 </html>
