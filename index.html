@@ -1,273 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Optiks Mechatronics</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link rel="stylesheet" href="CSS.css">
-
-<script src="script.js" defer></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Optiks Mechatronics - Engineering the Future of Smart Lighting Technology">
+    <title>Optiks Mechatronics | Smart Lighting Technology</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#E53935',
+                            blue: '#2F5BFF',
+                            white: '#FFFFFF',
+                            lightGrey: '#F4F6F8',
+                            silver: '#E5E7EB',
+                            dark: '#1F2937'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-
-
-<body class="bg-gray-100 font-sans">
-
-
-<!-- HEADER -->
-
-<header id="main-header" class="bg-white shadow p-4 flex justify-between items-center">
-
-<div class="flex items-center gap-3">
-
-<div class="w-10 h-10 bg-red-500 text-white flex items-center justify-center rounded font-bold">
-O
-</div>
-
-<div>
-
-<h1 class="font-bold text-lg">
-OPTIKS
-</h1>
-
-<p class="text-xs text-blue-500">
-MECHATRONICS
-</p>
-
-</div>
-
-</div>
-
-
-<nav class="space-x-6 hidden md:block">
-
-<a href="#home">Home</a>
-<a href="#products">Products</a>
-<a href="#contact">Contact</a>
-
-</nav>
-
-
-</header>
-
-
-<!-- HERO -->
-
-<section id="home" class="text-center py-20 bg-white">
-
-<h1 class="text-4xl font-bold mb-4">
-
-Engineering the Future of Smart Lighting
-
-</h1>
-
-<p class="text-gray-600">
-
-Professional lighting solutions with IP66 and IK protection
-
-</p>
-
-</section>
-
-
-
-<!-- PRODUCTS -->
-
-<section id="products" class="max-w-6xl mx-auto p-6">
-
-
-<h2 class="text-3xl font-bold text-center mb-8">
-Our Lighting Products
-</h2>
-
-
-<input
-
-id="product-search"
-placeholder="Search products..."
-class="border p-3 w-full rounded mb-10"
-
->
-
-
-<div id="loading" class="text-center py-6">
-
-Loading Products...
-
-</div>
-
-
-<div id="error" class="hidden text-center text-red-500">
-
-Unable to load products
-
-</div>
-
-
-<div id="no-results" class="hidden text-center text-gray-500">
-
-No products found
-
-</div>
-
-
-<div id="product-grid"
-
-class="grid md:grid-cols-3 gap-6">
-
-</div>
-
-
-<div id="product-count"
-
-class="text-center mt-8 text-gray-500">
-
-</div>
-
-
-</section>
-
-
-
-<!-- PRODUCT MODAL -->
-
-<div
-
-id="product-modal"
-
-class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center"
-
->
-
-<div class="bg-white max-w-4xl w-full p-6 rounded">
-
-<button
-
-id="close-modal"
-
-class="text-red-500 float-right"
-
->
-
-Close
-
-</button>
-
-
-<h2
-
-id="modal-product-name"
-
-class="text-2xl font-bold mb-3"
-
->
-
-</h2>
-
-
-<p
-
-id="modal-product-description"
-
-class="mb-6"
-
->
-
-</p>
-
-
-<div class="grid md:grid-cols-2 gap-8">
-
-
-<div>
-
-<h3 class="font-bold mb-4">
-Beam Angle Simulator
-</h3>
-
-<select
-
-id="beamSelect"
-
-class="border p-2 mb-4"
-
-onchange="simulateBeam()"
-
->
-
-<option value="10">10°</option>
-<option value="20">20°</option>
-<option value="30">30°</option>
-<option value="60">60°</option>
-<option value="120">120°</option>
-
-</select>
-
-
-<canvas
-
-id="beamCanvas"
-
-width="300"
-
-height="300"
-
-class="border"
-
-></canvas>
-
-
-</div>
-
-
-
-<div>
-
-<h3 class="font-bold mb-4">
-
-Specifications
-
-</h3>
-
-<div id="modal-specifications"></div>
-
-</div>
-
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- CONTACT -->
-
-<section id="contact" class="text-center py-20 bg-white">
-
-<h2 class="text-3xl font-bold mb-4">
-
-Contact Us
-
-</h2>
-
-<p>
-
-Optiks Mechatronics Lighting Technology
-
-</p>
-
-</section>
-
-
-
-</body>
-
-</html>
+<body class="bg-brand-lightGrey text-brand-dark font-sans antialiased">
+
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-12 h-12 bg-brand-red rounded-lg flex items-center justify-center mr-3 shadow-lg">
+                        <span class="text-white font-bold text-2xl">O</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight text-brand-dark">OPTIKS</h1>
+                        <p class="text-xs text-brand-blue font-semibold tracking-widest">MECHATRONICS</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Menu -->
+                <nav class="hidden lg:flex space-x-1">
+                    <a href="#home" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">HOME</a>
+                    <a href="#about" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">ABOUT US</a>
+                    <a href="#products" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">PRODUCTS</a>
+                    <a href="#innovation" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">INNOVATION</a>
+                    <a href="#presence" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">PRESENCE</a>
+                    <a href="#investors" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">INVESTORS</a>
+                    <a href="#sustainability" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">SUSTAINABILITY</a>
+                    <a href="#newsroom" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">NEWSROOM</a>
+                    <a href="#talent" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">TALENT</a>
+                    <a href="#contact" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">CONTACT</a>
+                </nav>
+
+                <!-- Icons -->
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-500 hover:text-brand-blue transition" id="search-btn">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    <button class="text-gray-500 hover:text-brand-blue transition relative" id="cart-btn">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <span class="absolute -top-1 -right-1 w-4 h-4 bg-brand-red text-white text-xs rounded-full flex items-center justify-center" id="cart-count">0</span>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button class="lg:hidden text-gray-500 hover:text-brand-blue transition" id="mobile-menu-btn">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="lg:hidden hidden bg-white border-t border-brand-silver" id="mobile-menu">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#home" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">HOME</a>
+                <a href="#about" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">ABOUT US</a>
+                <a href="#products" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">PRODUCTS</a>
+                <a href="#innovation" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">INNOVATION</a>
+                <a href="#presence" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">PRESENCE</a>
+                <a href="#investors" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">INVESTORS</a>
+                <a href="#sustainability" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">SUSTAINABILITY</a>
+                <a href="#newsroom" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">NEWSROOM</a>
+                <a href="#talent" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">TALENT</a>
+                <a href="#contact" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-brand-lightGrey rounded-lg transition">CONTACT</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-blue/10 via-brand-red/5 to-transparent"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-blue/20 rounded-full blur-3xl animate-pulse-slow"></div>
+            <div class="absolute top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-brand-red/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-block px-4 py-2 bg-brand-blue/10 text-brand-blue font-semibold rounded-full text-sm mb-6">
+                    🚀 Next Generation Lighting Technology
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-brand-dark mb-6">
+                    Engineering the <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-red">Future</span> of Smart Lighting
+                </h1>
+                <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+                    Precision mechatronics meets optical excellence. Experience the next generation of industrial and architectural illumination with cutting-edge LED technology.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#products" class="px-8 py-4 bg-brand-blue text-white font-bold rounded-full shadow-lg hover:shadow-brand-blue/50 transition transform hover:-translate-y-1">
+                        Explore Products
+                    </a>
+                    <a href="#contact" class="px-8 py-4 bg-white text-brand-blue border-2 border-brand-blue font-bold rounded-full hover:bg-brand-lightGrey transition">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/10 to-brand-red/10 rounded-2xl transform rotate-3"></div>
+                    <div class="relative bg-brand-lightGrey rounded-2xl p-8 h-96 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-brand-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-16 h-16 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                            </div>
+                            <p class="text-gray-500 text-sm">Company Headquarters</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="inline-block px-4 py-2 bg-brand-red/10 text-brand-red font-semibold rounded-full text-sm mb-4">
+                        ABOUT US
+                    </div>
+                    <h2 class="text-4xl font-bold text-brand-dark mb-6">
+                        Illuminating the World with Innovation
+                    </h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Optiks Mechatronics is a pioneering lighting technology company dedicated to revolutionizing the way we experience light. Founded with a vision to merge precision engineering with sustainable innovation, we have become a global leader in smart lighting solutions.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Our team of expert engineers, designers, and innovators work tirelessly to create lighting systems that are not only energy-efficient but also enhance human well-being and productivity.
+                    </p>
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-brand-blue mb-2">15+</div>
+                            <div class="text-sm text-gray-500">Years Experience</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-brand-red mb-2">500+</div>
+                            <div class="text-sm text-gray-500">Products</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-brand-blue mb-2">100+</div>
+                            <div class="text-sm text-gray-500">Countries</div>
+                        </div>
+                    </div>
+                    <div class="bg-brand-lightGrey rounded-xl p-6">
+                        <h3 class="font-bold text-brand-dark mb-3">Our Mission</h3>
+                        <p class="text-gray-600 text-sm">
+                            To deliver cutting-edge lighting solutions that enhance quality of life while minimizing environmental impact through sustainable innovation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="products" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-2 bg-brand-blue/10 text-brand-blue font-semibold rounded-full text-sm mb-4">
+                    🏭 Our Product Catalog
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-brand-dark mb-4">
+                    Our Product Line
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
+                    Discover our range of high-performance lighting solutions engineered for excellence
+                </p>
+                <div class="w-20 h-1 bg-brand-red mx-auto"></div>
+            </div>
+
+            <!-- Search and Filter Bar -->
+            <div class="mb-12">
+                <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                    <div class="relative w-full md:w-96">
+                        <input 
+                            type="text" 
+                            id="product-search" 
+                            placeholder="Search products by name, category, or specifications..." 
+                            class="w-full px-6 py-4 border-2 border-brand-silver rounded-full focus:outline-none focus:border-brand-blue focus:ring-4 focus:ring-brand-blue/10 transition-all"
+                        >
+                        <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21
