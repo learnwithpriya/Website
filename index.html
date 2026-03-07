@@ -219,31 +219,192 @@
                 <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-brand-silver">
                     <div class="w-14 h-14 bg-brand
     <!-- PRODUCTS SECTION -->
-    <section id="products" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-brand-dark mb-4">Our Product Line</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Discover our range of high-performance lighting solutions engineered for excellence</p>
-                <div class="w-20 h-1 bg-brand-red mx-auto mt-6"></div>
+<section id="products" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <div class="inline-block px-4 py-2 bg-brand-blue/10 text-brand-blue font-semibold rounded-full text-sm mb-4">
+                🏭 Our Product Catalog
             </div>
+            <h2 class="text-4xl md:text-5xl font-bold text-brand-dark mb-4">
+                Our Product Line
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
+                Discover our range of high-performance lighting solutions engineered for excellence
+            </p>
+            <div class="w-20 h-1 bg-brand-red mx-auto"></div>
+        </div>
 
-            <!-- Product Grid -->
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Products will be dynamically loaded here -->
-            </div>
+        <!-- Search and Filter Bar -->
+        <div class="mb-12">
+            <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                <!-- Search Input -->
+                <div class="relative w-full md:w-96">
+                    <input 
+                        type="text" 
+                        id="product-search" 
+                        placeholder="Search products by name, category, or specifications..." 
+                        class="w-full px-6 py-4 border-2 border-brand-silver rounded-full focus:outline-none focus:border-brand-blue focus:ring-4 focus:ring-brand-blue/10 transition-all"
+                    >
+                    <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
 
-            <!-- Loading State -->
-            <div id="loading" class="text-center py-12">
-                <div class="inline-block w-12 h-12 border-4 border-brand-blue border-t-transparent rounded-full animate-spin"></div>
-                <p class="mt-4 text-gray-600">Loading products...</p>
-            </div>
-
-            <!-- Error State -->
-            <div id="error" class="hidden text-center py-12">
-                <p class="text-brand-red">Failed to load products. Please try again later.</p>
+                <!-- Category Filter -->
+                <select id="category-filter" class="px-6 py-4 border-2 border-brand-silver rounded-full focus:outline-none focus:border-brand-blue focus:ring-4 focus:ring-brand-blue/10 transition-all bg-white">
+                    <option value="all">All Categories</option>
+                    <option value="Round Flood Lights">Round Flood Lights</option>
+                    <option value="Linear Wall Washers">Linear Wall Washers</option>
+                    <option value="Architectural Lighting">Architectural Lighting</option>
+                    <option value="Industrial Lighting">Industrial Lighting</option>
+                    <option value="Street Lighting">Street Lighting</option>
+                    <option value="Bollard Lights">Bollard Lights</option>
+                    <option value="Underwater Lighting">Underwater Lighting</option>
+                </select>
             </div>
         </div>
-    </section>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Products will be dynamically loaded here -->
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="text-center py-16">
+            <div class="inline-block w-16 h-16 border-4 border-brand-blue border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p class="text-gray-600 text-lg font-medium">Loading products...</p>
+            <p class="text-gray-400 text-sm mt-2">Please wait while we fetch our catalog</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error" class="hidden text-center py-16">
+            <div class="bg-brand-red/10 border-2 border-brand-red rounded-2xl p-8 max-w-md mx-auto">
+                <svg class="w-16 h-16 text-brand-red mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-xl font-bold text-brand-dark mb-2">Unable to Load Products</h3>
+                <p class="text-gray-600 mb-4">Please check if Product.csv exists in the root directory</p>
+                <button onclick="fetchProducts()" class="px-6 py-3 bg-brand-blue text-white font-bold rounded-full hover:bg-brand-blue/90 transition">
+                    Try Again
+                </button>
+            </div>
+        </div>
+
+        <!-- No Results State -->
+        <div id="no-results" class="hidden text-center py-16">
+            <svg class="w-20 h-20 text-brand-silver mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-2xl font-bold text-brand-dark mb-2">No Products Found</h3>
+            <p class="text-gray-600">Try adjusting your search or filter criteria</p>
+        </div>
+
+        <!-- Product Count -->
+        <div id="product-count" class="text-center mt-8 text-gray-500">
+            <!-- Dynamic count will be inserted here -->
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div id="product-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="modal-backdrop"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[95vh] overflow-y-auto">
+        <button id="close-modal" class="absolute top-4 right-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:bg-brand-lightGrey transition flex items-center justify-center">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+            <!-- 3D Viewer Section -->
+            <div class="p-8 bg-brand-lightGrey">
+                <div class="sticky top-0">
+                    <model-viewer
+                        id="model-viewer"
+                        src="assets/models/light.glb"
+                        auto-rotate
+                        camera-controls
+                        ar
+                        shadow-intensity="1"
+                        shadow-softness="0.5"
+                        style="width:100%; height:450px; background: white; border-radius: 16px;">
+                    </model-viewer>
+                    <div class="mt-4 flex gap-3">
+                        <button class="flex-1 px-4 py-3 bg-brand-blue text-white font-semibold rounded-xl hover:bg-brand-blue/90 transition flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            View in AR
+                        </button>
+                        <button class="flex-1 px-4 py-3 bg-brand-silver text-brand-dark font-semibold rounded-xl hover:bg-brand-silver/80 transition flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            360° View
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Info Section -->
+            <div class="p-8">
+                <div class="mb-6">
+                    <span id="modal-product-category" class="px-4 py-2 bg-brand-blue/10 text-brand-blue text-sm font-semibold rounded-full"></span>
+                </div>
+                
+                <h2 id="modal-product-name" class="text-3xl md:text-4xl font-bold text-brand-dark mb-4"></h2>
+                
+                <p id="modal-product-description" class="text-gray-600 mb-6 leading-relaxed"></p>
+
+                <!-- Key Specifications -->
+                <div class="bg-brand-lightGrey rounded-2xl p-6 mb-6">
+                    <h3 class="font-bold text-brand-dark text-lg mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Key Specifications
+                    </h3>
+                    <div id="modal-specifications" class="grid grid-cols-2 gap-4"></div>
+                </div>
+
+                <!-- Customization Options -->
+                <div class="mb-6">
+                    <h3 class="font-bold text-brand-dark text-lg mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                        </svg>
+                        Customization Options
+                    </h3>
+                    <div id="modal-customization" class="space-y-3"></div>
+                </div>
+
+                <!-- Protection Ratings -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-brand-blue/5 rounded-xl p-4 text-center">
+                        <div class="text-2xl font-bold text-brand-blue mb-1">IP<sup id="modal-ip-rating">66</sup></div>
+                        <div class="text-sm text-gray-500">Ingress Protection</div>
+                    </div>
+                    <div class="bg-brand-red/5 rounded-xl p-4 text-center">
+                        <div class="text-2xl font-bold text-brand-red mb-1">IK<sup id="modal-ik-rating">10</sup></div>
+                        <div class="text-sm text-gray-500">Impact Protection</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-4">
+                    <button id="add-to-cart-btn" class="flex-1 px-6 py-4 bg-brand-blue text-white font-bold rounded-xl hover:bg-brand-blue/90 transition shadow-lg hover:shadow-brand-blue/50">
+                        Add to Cart
+                    </button>
+                    <button class="flex-1 px-6 py-4 bg-brand-silver text-brand-dark font-bold rounded-xl hover:bg-brand-silver/80 transition">
+                        Download Datasheet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- PRODUCT DETAIL MODAL -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden">
