@@ -37,18 +37,31 @@ const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
 // ============================================
 // CSV PARSING
 // ============================================
-function parseCSV(csvText) {
-    const lines = csvText.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim());
-    
-    return lines.slice(1).map(line => {
-        const values = line.split(',').map(v => v.trim());
-        const obj = {};
-        headers.forEach((header, index) => {
-            obj[header] = values[index] || '';
-        });
-        return obj;
-    });
+function parseCSV(text) {
+
+const lines = text.trim().split("\n");
+const headers = lines[0].split(",");
+
+const data = [];
+
+for (let i = 1; i < lines.length; i++) {
+
+const values = lines[i].split(",");
+
+let obj = {};
+
+headers.forEach((header,index)=>{
+
+obj[header.trim()] = values[index] ? values[index].trim() : "";
+
+});
+
+data.push(obj);
+
+}
+
+return data;
+
 }
 
 // ============================================
