@@ -9,8 +9,7 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<script type="module"
-src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+<link rel="stylesheet" href="CSS.css">
 
 </head>
 
@@ -22,11 +21,18 @@ src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.j
 <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
 
 <div class="flex items-center gap-3">
-<img src="logo.png" class="h-10">
-<h1 class="font-bold text-xl">OPTIKS MECHATRONICS</h1>
+
+<div class="w-10 h-10 bg-red-500 text-white flex items-center justify-center rounded">
+O
 </div>
 
-<nav class="flex gap-6">
+<h1 class="font-bold text-xl">
+OPTIKS MECHATRONICS
+</h1>
+
+</div>
+
+<nav class="flex gap-6 text-gray-600">
 <a href="#home">Home</a>
 <a href="#products">Products</a>
 <a href="#contact">Contact</a>
@@ -44,16 +50,17 @@ Engineering the Future of Smart Lighting
 </h1>
 
 <p class="text-gray-600">
-IP66 / IK Protected Professional Lighting Systems
+IP66 & IK Protected Professional Lighting Systems
 </p>
 
 </section>
 
-<!-- PRODUCTS -->
+<!-- PRODUCT SECTION -->
+
 <section id="products" class="max-w-7xl mx-auto p-6">
 
-<h2 class="text-3xl font-bold text-center mb-6">
-Product Catalog
+<h2 class="text-3xl font-bold text-center mb-8">
+Our Lighting Products
 </h2>
 
 <input
@@ -61,7 +68,8 @@ id="search"
 placeholder="Search product..."
 class="border p-3 w-full mb-8 rounded">
 
-<div id="product-grid"
+<div
+id="product-grid"
 class="grid md:grid-cols-3 gap-6">
 
 </div>
@@ -69,152 +77,47 @@ class="grid md:grid-cols-3 gap-6">
 </section>
 
 <!-- PRODUCT MODAL -->
-<div id="modal"
+
+<div
+id="modal"
 class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
 
-<div class="bg-white p-6 rounded max-w-4xl w-full">
+<div class="bg-white p-6 rounded max-w-3xl w-full">
 
-<button onclick="closeModal()" class="text-red-500 float-right">
+<button
+onclick="closeModal()"
+class="float-right text-red-500">
 Close
 </button>
 
-<h2 id="modal-name" class="text-2xl font-bold mb-2"></h2>
+<h2
+id="modal-name"
+class="text-2xl font-bold mb-3"></h2>
 
-<p id="modal-desc" class="mb-4"></p>
+<p
+id="modal-desc"
+class="mb-4"></p>
 
-<div class="grid md:grid-cols-2 gap-6">
-
-<model-viewer
-src="assets/models/light.glb"
-auto-rotate
-camera-controls
-style="width:100%; height:300px">
-</model-viewer>
-
-<div id="modal-specs"></div>
+<div
+id="modal-specs"
+class="space-y-2"></div>
 
 </div>
 
 </div>
 
-</div>
+<!-- FOOTER -->
 
-<script>
+<footer id="contact" class="bg-white mt-16 p-6 text-center">
 
-let products=[]
+<p class="text-gray-500">
+© 2026 Optiks Mechatronics
+</p>
 
-fetch("Product.csv")
+</footer>
 
-.then(res=>res.text())
-
-.then(text=>{
-
-const rows=text.split("\n").slice(1)
-
-rows.forEach(row=>{
-
-const cols=row.split(",")
-
-const product={
-name:cols[0],
-category:cols[1],
-size:cols[2],
-beam:cols[3],
-lens:cols[4],
-cct:cols[5],
-ip:cols[6],
-ik:cols[7],
-custom:cols[8],
-desc:cols[9]
-}
-
-products.push(product)
-
-})
-
-renderProducts(products)
-
-})
-
-function renderProducts(data){
-
-const grid=document.getElementById("product-grid")
-
-grid.innerHTML=""
-
-data.forEach(p=>{
-
-const card=document.createElement("div")
-
-card.className="bg-white p-4 rounded shadow cursor-pointer"
-
-card.innerHTML=`
-
-<h3 class="font-bold text-lg">${p.name}</h3>
-
-<p class="text-gray-500">${p.category}</p>
-
-<p class="text-sm mt-2">Size: ${p.size}</p>
-<p class="text-sm">Beam: ${p.beam}</p>
-
-`
-
-card.onclick=()=>openModal(p)
-
-grid.appendChild(card)
-
-})
-
-}
-
-function openModal(p){
-
-document.getElementById("modal").classList.remove("hidden")
-
-document.getElementById("modal-name").innerText=p.name
-
-document.getElementById("modal-desc").innerText=p.desc
-
-document.getElementById("modal-specs").innerHTML=`
-
-<p><b>Category:</b> ${p.category}</p>
-<p><b>Size:</b> ${p.size}</p>
-<p><b>Beam:</b> ${p.beam}</p>
-<p><b>Lens:</b> ${p.lens}</p>
-<p><b>CCT:</b> ${p.cct}</p>
-<p><b>IP Rating:</b> ${p.ip}</p>
-<p><b>IK Rating:</b> ${p.ik}</p>
-<p><b>Customization:</b> ${p.custom}</p>
-
-`
-
-}
-
-function closeModal(){
-
-document.getElementById("modal").classList.add("hidden")
-
-}
-
-document.getElementById("search")
-
-.addEventListener("input",function(){
-
-const term=this.value.toLowerCase()
-
-const filtered=products.filter(p=>
-
-p.name.toLowerCase().includes(term) ||
-
-p.category.toLowerCase().includes(term)
-
-)
-
-renderProducts(filtered)
-
-})
-
-</script>
+<!-- LOAD JAVASCRIPT -->
+<script src="script.js"></script>
 
 </body>
 </html>
