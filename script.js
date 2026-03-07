@@ -13,14 +13,20 @@ let currentProduct = null;
 const productGrid = document.getElementById('product-grid');
 const loading = document.getElementById('loading');
 const error = document.getElementById('error');
+const noResults = document.getElementById('no-results');
+const productCount = document.getElementById('product-count');
 const productModal = document.getElementById('product-modal');
 const modalBackdrop = document.getElementById('modal-backdrop');
 const closeModal = document.getElementById('close-modal');
+const productSearch = document.getElementById('product-search');
+const categoryFilter = document.getElementById('category-filter');
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 const mainHeader = document.getElementById('main-header');
 const cartBtn = document.getElementById('cart-btn');
 const cartCount = document.getElementById('cart-count');
+const searchBtn = document.getElementById('search-btn');
+const addToCartBtn = document.getElementById('add-to-cart-btn');
 
 // ============================================
 // CSV PARSING
@@ -44,13 +50,17 @@ function parseCSV(csvText) {
 // ============================================
 async function fetchProducts() {
     try {
-        const response = await fetch('products.csv');
+        loading.classList.remove('hidden');
+        error.classList.add('hidden');
+        
+        const response = await fetch('Product.csv');
         if (!response.ok) {
             throw new Error('Failed to fetch products');
         }
         const csvText = await response.text();
         products = parseCSV(csvText);
         renderProducts(products);
+        loading.classList.add('hidden');
     } catch (error) {
         console.error('Error fetching products:', error);
         loading.classList.add('hidden');
@@ -88,16 +98,25 @@ function createProductCard(product, index) {
     card.className = 'group relative bg-brand-lightGrey rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-brand-silver';
     card.setAttribute('data-index', index);
 
+    // Generate image URL based on product name
+    const imageName = product.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const imageUrl = `assets/images/products/${imageName}.jpg`;
+
     card.innerHTML = `
         <div class="h-64 bg-white flex items-center justify-center p-8 relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-brand-red/5"></div>
-            <img src="assets/images/${product.name.toLowerCase().replace(/\s+/g, '-')}.jpg" 
+            <img src="${imageUrl}" 
                  alt="${product.name}" 
                  class="relative z-10 transform group-hover:scale-110 transition duration-500 w-full h-full object-cover"
                  onerror="this.src='https://via.placeholder.com/300x300/E5E7EB/2F5BFF?text=${encodeURIComponent(product.name)}'">
             <div class="absolute top-4 right-4 z-20">
                 <span class="px-3 py-1 bg-brand-blue text-white text-xs font-semibold rounded-full">
-                    ${product.wattage}W
+                    ${product.size || product.wattage}W
+                </span>
+            </div>
+            <div class="absolute bottom-4 left-4 z-20">
+                <span class="px-3 py-1 bg-brand-red/10 text-brand-red text-xs font-semibold rounded-full">
+                    IP${product.ip_rating}
                 </span>
             </div>
         </div>
@@ -107,6 +126,10 @@ function createProductCard(product, index) {
             
             <div class="grid grid-cols-2 gap-2 mb-4 text-sm">
                 <div class="bg-white rounded-lg p-2">
+                    <span class="text-gray-400 text-xs">Size/Dimensions</span>
+                    <p class="font-semibold text-brand-dark">${product.size || product.wattage}W</p>
+                </div>
+                <div class="bg-white rounded-lg p-2">
                     <span class="text-gray-400 text-xs">Beam Angle</span>
                     <p class="font-semibold text-brand-dark">${product.beam_angle}°</p>
                 </div>
@@ -115,12 +138,16 @@ function createProductCard(product, index) {
                     <p class="font-semibold text-brand-dark">IP${product.ip_rating}</p>
                 </div>
                 <div class="bg-white rounded-lg p-2">
+                    <span class="text-gray-400 text-xs">IK Rating</span>
+                    <p class="font-semibold text-brand-dark">IK${product.ik_rating || '08'}</p>
+                </div>
+                <div class="bg-white rounded-lg p-2">
                     <span class="text-gray-400 text-xs">Lens Type</span>
                     <p class="font-semibold text-brand-dark">${product.lens_type}</p>
                 </div>
                 <div class="bg-white rounded-lg p-2">
                     <span class="text-gray-400 text-xs">CCT</span>
-                    <p class="font-semibold text-brand-dark">${product.cct}K</p>
+                    <p class="font-semibold text-brand-dark">${product.cct}</p>
                 </div>
             </div>
 
@@ -149,15 +176,15 @@ function openProductModal(index) {
     // Populate modal with product data
     document.getElementById('modal-product-name').textContent = currentProduct.name;
     document.getElementById('modal-product-category').textContent = currentProduct.category;
-    document.getElementById('modal-product-wattage').textContent = `${currentProduct.wattage}W`;
+    document.getElementById('modal-product-wattage').textContent = `${currentProduct.size || currentProduct.wattage}W`;
     document.getElementById('modal-product-description').textContent = currentProduct.description;
     
     // Populate specifications
     const specsHTML = `
         <div class="grid grid-cols-2 gap-4">
             <div>
-                <p class="text-sm text-gray-500">Wattage</p>
-                <p class="font-semibold text-brand-dark">${currentProduct.wattage}W</p>
+                <p class="text-sm text-gray-500">Size/Dimensions</p>
+                <p class="font-semibold text-brand-dark">${currentProduct.size || currentProduct.wattage}W</p>
             </div>
             <div>
                 <p class="text-sm text-gray-500">Beam Angle</p>
@@ -168,12 +195,16 @@ function openProductModal(index) {
                 <p class="font-semibold text-brand-dark">${currentProduct.lens_type}</p>
             </div>
             <div>
-                <p class="text-sm text-gray-500">CCT</p>
-                <p class="font-semibold text-brand-dark">${currentProduct.cct}K</p>
+                <p class="text-sm text-gray-500">Color Temperature</p>
+                <p class="font-semibold text-brand-dark">${currentProduct.cct}</p>
             </div>
             <div>
                 <p class="text-sm text-gray-500">IP Rating</p>
                 <p class="font-semibold text-brand-dark">IP${currentProduct.ip_rating}</p>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500">IK Rating</p>
+                <p class="font-semibold text-brand-dark">IK${currentProduct.ik_rating || '08'}</p>
             </div>
             <div>
                 <p class="text-sm text-gray-500">Customization</p>
@@ -268,7 +299,10 @@ function filterProducts(query) {
     const filtered = products.filter(product => 
         product.name.toLowerCase().includes(query.toLowerCase()) ||
         product.category.toLowerCase().includes(query.toLowerCase()) ||
-        product.description.toLowerCase().includes(query.toLowerCase())
+        product.description.toLowerCase().includes(query.toLowerCase()) ||
+        product.size.toLowerCase().includes(query.toLowerCase()) ||
+        product.beam_angle.toLowerCase().includes(query.toLowerCase()) ||
+        product.cct.toLowerCase().includes(query.toLowerCase())
     );
     renderProducts(filtered);
 }
@@ -375,7 +409,7 @@ function setupProductConfigurator() {
 function generateModelNumber(product, config) {
     // Example: OPT-FL-100W-60D-6500K
     const categoryCode = product.category.substring(0, 2).toUpperCase();
-    return `OPT-${categoryCode}-${product.wattage}W-${config}`;
+    return `OPT-${categoryCode}-${product.size || product.wattage}W-${config}`;
 }
 
 // ============================================
@@ -419,39 +453,4 @@ function setupContactForm() {
 // ============================================
 function setupAnimations() {
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-fade-in');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-        observer.observe(el);
-    });
-}
-
-// ============================================
-// INITIALIZATION
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    // Fetch and render products
-    fetchProducts();
-    
-    // Setup event listeners
-    setupSearch();
-    setupMobileMenu();
-    setupHeaderScroll();
-    setupSmoothScroll();
-    setupProductConfigurator();
-    setupNewsletter();
-    setupContactForm();
-    setupAnimations();
-    
-    // Initialize 3D viewer
+        threshold:
