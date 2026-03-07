@@ -1,4 +1,9 @@
-// Optiks Mechatronics - Main JavaScript File
+// ============================================
+// OPTIKS MECHATRONICS - COMPLETE JAVASCRIPT
+// ============================================
+// Version: 2.0.0
+// Last Updated: 2024
+// ============================================
 
 // ============================================
 // GLOBAL VARIABLES
@@ -6,6 +11,9 @@
 let products = [];
 let cart = [];
 let currentProduct = null;
+let filteredProducts = [];
+let searchQuery = '';
+let selectedCategory = 'all';
 
 // ============================================
 // DOM ELEMENTS
@@ -52,6 +60,7 @@ async function fetchProducts() {
     try {
         loading.classList.remove('hidden');
         error.classList.add('hidden');
+        noResults.classList.add('hidden');
         
         const response = await fetch('Product.csv');
         if (!response.ok) {
@@ -59,12 +68,27 @@ async function fetchProducts() {
         }
         const csvText = await response.text();
         products = parseCSV(csvText);
-        renderProducts(products);
+        filteredProducts = [...products];
+        
+        renderProducts(filteredProducts);
+        updateProductCount();
         loading.classList.add('hidden');
     } catch (error) {
         console.error('Error fetching products:', error);
         loading.classList.add('hidden');
         error.classList.remove('hidden');
+    }
+}
+
+// ============================================
+// UPDATE PRODUCT COUNT
+// ============================================
+function updateProductCount() {
+    if (productCount) {
+        productCount.innerHTML = `
+            <span class="text-lg font-semibold text-brand-blue">${filteredProducts.length}</span>
+            <span class="text-gray-500"> products available</span>
+        `;
     }
 }
 
@@ -76,18 +100,25 @@ function renderProducts(productList) {
     productGrid.innerHTML = '';
 
     if (productList.length === 0) {
-        productGrid.innerHTML = `
-            <div class="col-span-full text-center py-12">
-                <p class="text-gray-500 text-lg">No products found</p>
-            </div>
-        `;
+        noResults.classList.remove('hidden');
         return;
     }
+
+    noResults.classList.add('hidden');
 
     productList.forEach((product, index) => {
         const card = createProductCard(product, index);
         productGrid.appendChild(card);
     });
+
+    // Add staggered animation
+    setTimeout(() => {
+        const cards = productGrid.querySelectorAll('.product-card');
+        cards.forEach((card, i) => {
+            card.style.animation = `fadeInUp 0.5s ease forwards ${i * 0.05}s`;
+            card.style.opacity = '0';
+        });
+    }, 100);
 }
 
 // ============================================
@@ -95,7 +126,7 @@ function renderProducts(productList) {
 // ============================================
 function createProductCard(product, index) {
     const card = document.createElement('div');
-    card.className = 'group relative bg-brand-lightGrey rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-brand-silver';
+    card.className = 'product-card group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-brand-silver';
     card.setAttribute('data-index', index);
 
     // Generate image URL based on product name
@@ -103,7 +134,7 @@ function createProductCard(product, index) {
     const imageUrl = `assets/images/products/${imageName}.jpg`;
 
     card.innerHTML = `
-        <div class="h-64 bg-white flex items-center justify-center p-8 relative overflow-hidden">
+        <div class="h-64 bg-brand-lightGrey flex items-center justify-center p-8 relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/5 to-brand-red/5"></div>
             <img src="${imageUrl}" 
                  alt="${product.name}" 
@@ -121,31 +152,31 @@ function createProductCard(product, index) {
             </div>
         </div>
         <div class="p-6">
-            <h3 class="text-xl font-bold text-brand-dark mb-2">${product.name}</h3>
+            <h3 class="text-lg font-bold text-brand-dark mb-2 line-clamp-2">${product.name}</h3>
             <p class="text-gray-500 text-sm mb-4 line-clamp-2">${product.description}</p>
             
             <div class="grid grid-cols-2 gap-2 mb-4 text-sm">
-                <div class="bg-white rounded-lg p-2">
+                <div class="bg-brand-lightGrey rounded-lg p-2">
                     <span class="text-gray-400 text-xs">Size/Dimensions</span>
                     <p class="font-semibold text-brand-dark">${product.size || product.wattage}W</p>
                 </div>
-                <div class="bg-white rounded-lg p-2">
+                <div class="bg-brand-lightGrey rounded-lg p-2">
                     <span class="text-gray-400 text-xs">Beam Angle</span>
                     <p class="font-semibold text-brand-dark">${product.beam_angle}°</p>
                 </div>
-                <div class="bg-white rounded-lg p-2">
+                <div class="bg-brand-lightGrey rounded-lg p-2">
                     <span class="text-gray-400 text-xs">IP Rating</span>
                     <p class="font-semibold text-brand-dark">IP${product.ip_rating}</p>
                 </div>
-                <div class="bg-white rounded-lg p-2">
+                <div class="bg-brand-lightGrey rounded-lg p-2">
                     <span class="text-gray-400 text-xs">IK Rating</span>
                     <p class="font-semibold text-brand-dark">IK${product.ik_rating || '08'}</p>
                 </div>
-                <div class="bg-white rounded-lg p-2">
+                <div class="bg-brand-lightGrey rounded-lg p-2">
                     <span class="text-gray-400 text-xs">Lens Type</span>
                     <p class="font-semibold text-brand-dark">${product.lens_type}</p>
                 </div>
-                <div class="bg-white rounded-lg p-2">
+                <div class="bg-brand-lightGrey rounded-lg p-2">
                     <span class="text-gray-400 text-xs">CCT</span>
                     <p class="font-semibold text-brand-dark">${product.cct}</p>
                 </div>
@@ -213,6 +244,37 @@ function openProductModal(index) {
         </div>
     `;
     document.getElementById('modal-specifications').innerHTML = specsHTML;
+    
+    // Update IP and IK ratings
+    document.getElementById('modal-ip-rating').textContent = currentProduct.ip_rating;
+    document.getElementById('modal-ik-rating').textContent = currentProduct.ik_rating;
+
+    // Populate customization
+    const customizationHTML = `
+        <div class="space-y-3">
+            <div class="flex items-center justify-between p-3 bg-brand-lightGrey rounded-lg">
+                <span class="text-sm text-gray-600">Beam Angle Options</span>
+                <span class="text-sm font-semibold text-brand-dark">${currentProduct.beam_angle}</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-brand-lightGrey rounded-lg">
+                <span class="text-sm text-gray-600">CCT Options</span>
+                <span class="text-sm font-semibold text-brand-dark">${currentProduct.cct}</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-brand-lightGrey rounded-lg">
+                <span class="text-sm text-gray-600">Customization</span>
+                <span class="text-sm font-semibold text-brand-dark">${currentProduct.customization}</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-brand-lightGrey rounded-lg">
+                <span class="text-sm text-gray-600">Reverse Engineering</span>
+                <span class="text-sm font-semibold text-brand-blue">Available</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-brand-lightGrey rounded-lg">
+                <span class="text-sm text-gray-600">Custom Housing</span>
+                <span class="text-sm font-semibold text-brand-blue">Available</span>
+            </div>
+        </div>
+    `;
+    document.getElementById('modal-customization').innerHTML = customizationHTML;
 
     // Show modal
     productModal.classList.remove('hidden');
@@ -276,49 +338,71 @@ function showNotification(message, type = 'success') {
 // SEARCH FUNCTIONALITY
 // ============================================
 function setupSearch() {
-    const searchBtn = document.getElementById('search-btn');
-    let searchInput = null;
+    if (productSearch) {
+        productSearch.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            filterProducts();
+        });
+    }
     
-    searchBtn.addEventListener('click', () => {
-        if (!searchInput) {
-            searchInput = document.createElement('input');
-            searchInput.type = 'text';
-            searchInput.placeholder = 'Search products...';
-            searchInput.className = 'w-64 px-4 py-2 border border-brand-silver rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 transition';
-            searchInput.addEventListener('input', (e) => filterProducts(e.target.value));
-            
-            searchBtn.parentNode.insertBefore(searchInput, searchBtn.nextSibling);
-            searchInput.focus();
-        } else {
-            searchInput.focus();
-        }
-    });
+    // Also setup search button
+    if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+            if (productSearch) {
+                productSearch.focus();
+            }
+        });
+    }
 }
 
-function filterProducts(query) {
-    const filtered = products.filter(product => 
-        product.name.toLowerCase().includes(query.toLowerCase()) ||
-        product.category.toLowerCase().includes(query.toLowerCase()) ||
-        product.description.toLowerCase().includes(query.toLowerCase()) ||
-        product.size.toLowerCase().includes(query.toLowerCase()) ||
-        product.beam_angle.toLowerCase().includes(query.toLowerCase()) ||
-        product.cct.toLowerCase().includes(query.toLowerCase())
-    );
-    renderProducts(filtered);
+function filterProducts() {
+    filteredProducts = products.filter(product => {
+        const matchesSearch = 
+            product.name.toLowerCase().includes(searchQuery) ||
+            product.category.toLowerCase().includes(searchQuery) ||
+            product.description.toLowerCase().includes(searchQuery) ||
+            product.size.toLowerCase().includes(searchQuery) ||
+            product.beam_angle.toLowerCase().includes(searchQuery) ||
+            product.cct.toLowerCase().includes(searchQuery) ||
+            product.lens_type.toLowerCase().includes(searchQuery);
+        
+        const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+        
+        return matchesSearch && matchesCategory;
+    });
+    
+    renderProducts(filteredProducts);
+    updateProductCount();
+}
+
+// ============================================
+// CATEGORY FILTER
+// ============================================
+function setupCategoryFilter() {
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', (e) => {
+            selectedCategory = e.target.value;
+            filterProducts();
+        });
+    }
 }
 
 // ============================================
 // MOBILE MENU
 // ============================================
 function setupMobileMenu() {
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-            mobileMenu.classList.add('hidden');
+        if (mobileMenu && mobileMenuBtn) {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+            }
         }
     });
 }
@@ -373,84 +457,4 @@ function init3DViewer() {
             console.log('3D model loaded successfully');
         });
         
-        modelViewer.addEventListener('error', (e) => {
-            console.log('3D model load error:', e);
-            // Show fallback image if model fails
-            modelViewer.innerHTML = `
-                <div class="flex items-center justify-center h-full bg-brand-lightGrey rounded-lg">
-                    <div class="text-center">
-                        <svg class="w-16 h-16 text-brand-silver mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                        <p class="text-gray-500">3D Model Unavailable</p>
-                    </div>
-                </div>
-            `;
-        });
-    }
-}
-
-// ============================================
-// PRODUCT CONFIGURATOR
-// ============================================
-function setupProductConfigurator() {
-    const configurator = document.getElementById('product-configurator');
-    
-    if (configurator) {
-        configurator.addEventListener('change', (e) => {
-            if (currentProduct) {
-                const modelNumber = generateModelNumber(currentProduct, e.target.value);
-                document.getElementById('model-number').textContent = modelNumber;
-            }
-        });
-    }
-}
-
-function generateModelNumber(product, config) {
-    // Example: OPT-FL-100W-60D-6500K
-    const categoryCode = product.category.substring(0, 2).toUpperCase();
-    return `OPT-${categoryCode}-${product.size || product.wattage}W-${config}`;
-}
-
-// ============================================
-// NEWSLETTER SIGNUP
-// ============================================
-function setupNewsletter() {
-    const newsletterForm = document.getElementById('newsletter-form');
-    
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('newsletter-email').value;
-            
-            if (email && email.includes('@')) {
-                showNotification('Thank you for subscribing!', 'success');
-                newsletterForm.reset();
-            } else {
-                showNotification('Please enter a valid email', 'error');
-            }
-        });
-    }
-}
-
-// ============================================
-// CONTACT FORM
-// ============================================
-function setupContactForm() {
-    const contactForm = document.getElementById('contact-form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            showNotification('Message sent successfully!', 'success');
-            contactForm.reset();
-        });
-    }
-}
-
-// ============================================
-// ANIMATIONS
-// ============================================
-function setupAnimations() {
-    const observerOptions = {
-        threshold:
+        modelViewer.addEventListener('error', (e)
