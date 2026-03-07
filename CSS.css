@@ -1,12 +1,12 @@
 /* ============================================
-   OPTIKS MECHATRONICS - COMPLETE CSS
+   OPTIKS MECHATRONICS - DESKTOP CSS (1200px+)
    ============================================
    Version: 1.0.0
    Last Updated: 2024
    ============================================ */
 
 /* ============================================
-   1. CSS VARIABLES & RESET
+   1. CSS VARIABLES & DESIGN SYSTEM
    ============================================ */
 :root {
     /* Brand Colors */
@@ -27,6 +27,7 @@
     --spacing-xl: 2rem;
     --spacing-2xl: 3rem;
     --spacing-3xl: 4rem;
+    --spacing-4xl: 6rem;
     
     /* Border Radius */
     --radius-sm: 0.375rem;
@@ -34,6 +35,7 @@
     --radius-lg: 0.75rem;
     --radius-xl: 1rem;
     --radius-2xl: 1.5rem;
+    --radius-3xl: 2rem;
     --radius-full: 9999px;
     
     /* Shadows */
@@ -42,6 +44,7 @@
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
     
     /* Transitions */
     --transition-fast: 150ms ease;
@@ -52,9 +55,12 @@
     --z-header: 50;
     --z-modal: 100;
     --z-dropdown: 200;
+    --z-sticky: 300;
 }
 
-/* Reset & Base Styles */
+/* ============================================
+   2. RESET & BASE STYLES
+   ============================================ */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -103,7 +109,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   2. HEADER NAVIGATION
+   3. HEADER NAVIGATION BAR
    ============================================ */
 .header {
     position: fixed;
@@ -113,6 +119,7 @@ input, textarea, select {
     z-index: var(--z-header);
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: var(--shadow-sm);
     transition: var(--transition-base);
 }
@@ -123,9 +130,9 @@ input, textarea, select {
 }
 
 .header-container {
-    max-width: 1280px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 var(--spacing-lg);
+    padding: 0 var(--spacing-xl);
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -184,12 +191,30 @@ input, textarea, select {
     color: var(--color-text);
     border-radius: var(--radius-md);
     transition: var(--transition-base);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--color-secondary);
+    transition: width var(--transition-base);
 }
 
 .nav-link:hover,
 .nav-link.active {
     color: var(--color-secondary);
     background-color: var(--color-light-grey);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
 }
 
 .header-actions {
@@ -230,24 +255,13 @@ input, textarea, select {
     justify-content: center;
 }
 
-.mobile-menu-btn {
-    display: none;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text);
-}
-
 /* ============================================
-   3. HERO SECTION
+   4. HERO SECTION
    ============================================ */
 .hero {
     position: relative;
     min-height: 100vh;
-    padding: 160px var(--spacing-lg) var(--spacing-3xl);
+    padding: 160px var(--spacing-xl) var(--spacing-4xl);
     background: linear-gradient(135deg, var(--color-white) 0%, var(--color-light-grey) 100%);
     overflow: hidden;
 }
@@ -266,7 +280,7 @@ input, textarea, select {
 }
 
 .hero-container {
-    max-width: 1280px;
+    max-width: 1400px;
     margin: 0 auto;
     text-align: center;
     position: relative;
@@ -286,7 +300,7 @@ input, textarea, select {
 }
 
 .hero-title {
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 800;
     letter-spacing: -1px;
     margin-bottom: var(--spacing-lg);
@@ -325,7 +339,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   4. BUTTONS
+   5. BUTTONS
    ============================================ */
 .btn {
     display: inline-flex;
@@ -380,16 +394,51 @@ input, textarea, select {
 }
 
 /* ============================================
-   5. PRODUCT GRID
+   6. SEARCH BAR
+   ============================================ */
+.search-container {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.search-input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-xl);
+    padding-right: 48px;
+    border: 2px solid var(--color-silver);
+    border-radius: var(--radius-full);
+    font-size: 16px;
+    transition: var(--transition-base);
+    background-color: var(--color-white);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(47, 91, 255, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: var(--spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-light);
+    pointer-events: none;
+}
+
+/* ============================================
+   7. PRODUCT GRID
    ============================================ */
 .products-section {
-    padding: var(--spacing-3xl) var(--spacing-lg);
+    padding: var(--spacing-4xl) var(--spacing-xl);
     background-color: var(--color-white);
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: var(--spacing-3xl);
+    margin-bottom: var(--spacing-4xl);
 }
 
 .section-badge {
@@ -404,7 +453,7 @@ input, textarea, select {
 }
 
 .section-title {
-    font-size: 42px;
+    font-size: 48px;
     font-weight: 800;
     letter-spacing: -1px;
     margin-bottom: var(--spacing-md);
@@ -424,47 +473,55 @@ input, textarea, select {
     margin: var(--spacing-lg) auto 0;
     border-radius: var(--radius-full);
 }
-  2. PRODUCT CARDS
-   ============================================ */
+
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-lg);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
     margin-bottom: var(--spacing-2xl);
 }
 
+/* ============================================
+   8. PRODUCT CARDS
+   ============================================ */
 .product-card {
     background-color: var(--color-white);
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    transition: var(--transition-base);
     border: 1px solid var(--color-silver);
+    transition: var(--transition-base);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .product-card:hover {
     box-shadow: var(--shadow-xl);
     transform: translateY(-8px);
+    border-color: var(--color-secondary);
 }
 
 .product-image {
     position: relative;
+    width: 100%;
     height: 240px;
     background-color: var(--color-light-grey);
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
 
 .product-image::before {
-    content: '';
+       content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, rgba(47, 91, 255, 0.05) 0%, rgba(229, 57, 53, 0.05) 100%);
     opacity: 0;
     transition: var(--transition-base);
+    pointer-events: none;
 }
 
 .product-card:hover .product-image::before {
@@ -475,13 +532,17 @@ input, textarea, select {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: var(--transition-slow);
+    transition: transform var(--transition-slow);
+    transform: scale(1);
 }
 
 .product-card:hover .product-image img {
     transform: scale(1.1);
 }
 
+/* ============================================
+   9. PRODUCT BADGES
+   ============================================ */
 .product-badges {
     position: absolute;
     top: var(--spacing-md);
@@ -489,6 +550,7 @@ input, textarea, select {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+    z-index: 10;
 }
 
 .product-badge {
@@ -497,6 +559,7 @@ input, textarea, select {
     font-weight: 600;
     border-radius: var(--radius-full);
     text-align: center;
+    box-shadow: var(--shadow-sm);
 }
 
 .product-badge.wattage {
@@ -509,8 +572,15 @@ input, textarea, select {
     color: var(--color-primary);
 }
 
+/* ============================================
+   10. PRODUCT CONTENT
+   ============================================ */
 .product-content {
     padding: var(--spacing-lg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .product-name {
@@ -518,6 +588,7 @@ input, textarea, select {
     font-weight: 700;
     margin-bottom: var(--spacing-sm);
     line-height: 1.4;
+    color: var(--color-dark);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -561,10 +632,14 @@ input, textarea, select {
     color: var(--color-dark);
 }
 
+/* ============================================
+   11. PRODUCT ACTIONS
+   ============================================ */
 .product-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
 }
 
 .view-details {
@@ -572,6 +647,9 @@ input, textarea, select {
     font-size: 14px;
     font-weight: 600;
     transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
 }
 
 .view-details:hover {
@@ -588,84 +666,32 @@ input, textarea, select {
     align-items: center;
     justify-content: center;
     transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
 }
 
 .add-to-cart:hover {
     background-color: #c92a26;
     transform: scale(1.1);
-}
-
-/* ============================================
-   3. BUTTONS
-   ============================================ */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-md) var(--spacing-xl);
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: var(--radius-full);
-    transition: var(--transition-base);
-    cursor: pointer;
-    border: 2px solid transparent;
-}
-
-.btn-primary {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
     box-shadow: var(--shadow-md);
 }
 
-.btn-primary:hover {
-    background-color: #2548d4;
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    background-color: var(--color-white);
-    color: var(--color-secondary);
-    border-color: var(--color-secondary);
-}
-
-.btn-secondary:hover {
-    background-color: var(--color-light-grey);
-    transform: translateY(-2px);
-}
-
-.btn-lg {
-    padding: var(--spacing-lg) var(--spacing-2xl);
-    font-size: 18px;
-}
-
-.btn-icon {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border-radius: var(--radius-full);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 /* ============================================
-   4. MODAL WINDOW
+   12. MODAL WINDOW
    ============================================ */
 .modal-overlay {
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: var(--z-modal);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
     opacity: 0;
     visibility: hidden;
-    transition: var(--transition-base);
+    transition: opacity var(--transition-base), visibility var(--transition-base);
 }
 
 .modal-overlay.active {
@@ -682,11 +708,14 @@ input, textarea, select {
     overflow-y: auto;
     box-shadow: var(--shadow-2xl);
     transform: scale(0.9);
-    transition: var(--transition-base);
+    opacity: 0;
+    transition: transform var(--transition-base), opacity var(--transition-base);
+    position: relative;
 }
 
 .modal-overlay.active .modal-container {
     transform: scale(1);
+    opacity: 1;
 }
 
 .modal-close {
@@ -711,6 +740,11 @@ input, textarea, select {
     transform: rotate(90deg);
 }
 
+.modal-close svg {
+    width: 24px;
+    height: 24px;
+}
+
 .modal-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -726,12 +760,18 @@ input, textarea, select {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    position: relative;
 }
 
 .modal-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.modal-image:hover img {
+    transform: scale(1.05);
 }
 
 .modal-info {
@@ -755,6 +795,7 @@ input, textarea, select {
     font-size: 28px;
     font-weight: 700;
     line-height: 1.3;
+    color: var(--color-dark);
 }
 
 .modal-description {
@@ -776,6 +817,7 @@ input, textarea, select {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+    color: var(--color-dark);
 }
 
 .modal-specs-grid {
@@ -870,89 +912,37 @@ input, textarea, select {
 }
 
 /* ============================================
-   5. SEARCH BAR
+   13. FOOTER
    ============================================ */
-.search-container {
-    position: relative;
-    max-width: 400px;
-    margin: 0 auto var(--spacing-xl);
-}
-
-.search-input {
-    width: 100%;
-    padding: var(--spacing-md) var(--spacing-xl);
-    padding-right: 48px;
-    border: 2px solid var(--color-silver);
-    border-radius: var(--radius-full);
-    font-size: 16px;
-    transition: var(--transition-base);
-    background-color: var(--color-white);
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 4px rgba(47, 91, 255, 0.1);
-}
-
-.search-icon {
-    position: absolute;
-    right: var(--spacing-md);
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--color-text-light);
-    pointer-events: none;
-}
-
-.search-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-xl);
-    margin-top: var(--spacing-sm);
-    max-height: 300px;
-    overflow-y: auto;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition-base);
-    z-index: 10;
-}
-
-.search-results.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.search-result-item {
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-bottom: 1px solid var(--color-silver);
-    transition: var(--transition-fast);
-}
-
-.search-result-item:last-child {
-    border-bottom: none;
-}
-
-.search-result-item:hover {
+.footer {
     background-color: var(--color-light-grey);
+    padding: var(--spacing-4xl) var(--spacing-xl) var(--spacing-2xl);
 }
 
-.search-result-name {
-    font-weight: 600;
-    color: var(--color-dark);
-    margin-bottom: var(--spacing-xs);
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.search-result-category {
-    font-size: 12px;
-    color: var(--color-text-light);
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-2xl);
+    margin-bottom: var(--spacing-2xl);
 }
-/* ============================================
-   6. FOOTER (CONTINUED)
-   ============================================ */
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
 .footer-logo-icon {
     width: 40px;
     height: 40px;
@@ -1124,8 +1114,6 @@ input, textarea, select {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: var(--spacing-md);
 }
 
 .footer-copyright {
@@ -1149,186 +1137,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   7. RESPONSIVE MOBILE LAYOUT
-   ============================================ */
-
-/* Mobile Breakpoint (< 768px) */
-@media (max-width: 768px) {
-    /* Header */
-    .header-container {
-        padding: 0 var(--spacing-md);
-    }
-
-    .nav-menu {
-        display: none;
-    }
-
-    .mobile-menu-btn {
-        display: flex;
-    }
-
-    .mobile-menu {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        right: 0;
-        background-color: var(--color-white);
-        padding: var(--spacing-lg);
-        box-shadow: var(--shadow-lg);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--transition-base);
-        z-index: var(--z-dropdown);
-    }
-
-    .mobile-menu.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .mobile-menu-link {
-        display: block;
-        padding: var(--spacing-md);
-        font-size: 16px;
-        font-weight: 500;
-        color: var(--color-text);
-        border-radius: var(--radius-md);
-        transition: var(--transition-fast);
-    }
-
-    .mobile-menu-link:hover {
-        background-color: var(--color-light-grey);
-        color: var(--color-secondary);
-    }
-
-    /* Hero */
-    .hero {
-        padding: 120px var(--spacing-md) var(--spacing-2xl);
-    }
-
-    .hero-title {
-        font-size: 32px;
-    }
-
-    .hero-subtitle {
-        font-size: 16px;
-    }
-
-    .hero-cta-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .hero-cta-buttons .btn {
-        width: 100%;
-    }
-
-    /* Product Grid */
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-md);
-    }
-
-    .product-image {
-        height: 200px;
-    }
-
-    .product-content {
-        padding: var(--spacing-md);
-    }
-
-    .product-name {
-        font-size: 16px;
-    }
-
-    /* Modal */
-    .modal-content {
-        grid-template-columns: 1fr;
-        padding: var(--spacing-lg);
-    }
-
-    .modal-image {
-        height: 300px;
-    }
-
-    .modal-title {
-        font-size: 24px;
-    }
-
-    .modal-actions {
-        flex-direction: column;
-    }
-
-    /* Footer */
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-legal {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-    }
-
-    /* Search */
-    .search-container {
-        max-width: 100%;
-    }
-
-    /* Buttons */
-    .btn {
-        width: 100%;
-    }
-
-    /* Section Padding */
-    .products-section,
-    .hero {
-        padding-left: var(--spacing-md);
-        padding-right: var(--spacing-md);
-    }
-}
-
-/* Tablet Breakpoint (768px - 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Desktop Breakpoint (> 1024px) */
-@media (min-width: 1024px) {
-    .product-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .footer-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* Large Desktop (> 1280px) */
-@media (min-width: 1280px) {
-    .header-container,
-    .products-section,
-    .hero-container {
-        max-width: 1280px;
-        margin: 0 auto;
-    }
-}
-
-/* ============================================
-   8. ANIMATIONS
+   14. ANIMATIONS
    ============================================ */
 @keyframes fadeInUp {
     from {
@@ -1341,698 +1150,6 @@ input, textarea, select {
     }
 }
 
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Animation Classes */
-.animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
-}
-
-.animate-pulse {
-    animation: pulse 2s infinite;
-}
-
-.animate-spin {
-    animation: spin 1s linear infinite;
-}
-
-/* Loading Skeleton */
-.skeleton {
-    background: linear-gradient(90deg, var(--color-light-grey) 25%, var(--color-silver) 50%, var(--color-light-grey) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: var(--radius-md);
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: 200% 0;
-    }
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-/* ============================================
-   9. UTILITY CLASSES
-   ============================================ */
-.text-center {
-    text-align: center;
-}
-
-.text-left {
-    text-align: left;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.flex {
-    display: flex;
-}
-
-.grid {
-    display: grid;
-}
-
-.items-center {
-    align-items: center;
-}
-
-.justify-center {
-    justify-content: center;
-}
-
-.justify-between {
-    justify-content: space-between;
-}
-
-.gap-sm {
-    gap: var(--spacing-sm);
-}
-
-.gap-md {
-    gap: var(--spacing-md);
-}
-
-.gap-lg {
-    gap: var(--spacing-lg);
-}
-
-.mt-sm {
-    margin-top: var(--spacing-sm);
-}
-
-.mt-md {
-    margin-top: var(--spacing-md);
-}
-
-.mt-lg {
-    margin-top: var(--spacing-lg);
-}
-
-.mb-sm {
-    margin-bottom: var(--spacing-sm);
-}
-
-.mb-md {
-    margin-bottom: var(--spacing-md);
-}
-
-.mb-lg {
-    margin-bottom: var(--spacing-lg);
-}
-
-.p-sm {
-    padding: var(--spacing-sm);
-}
-
-.p-md {
-    padding: var(--spacing-md);
-}
-
-.p-lg {
-    padding: var(--spacing-lg);
-}
-
-/* ============================================
-   10. SCROLLBAR STYLING
-   ============================================ */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--color-light-grey);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--color-silver);
-    border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--color-text-light);
-}
-
-/* ============================================
-   11. PRINT STYLES
-   ============================================ */
-@media print {
-    .header,
-    .hero,
-    .modal-overlay,
-    .mobile-menu {
-        display: none;
-    }
-
-    body {
-        background-color: white;
-    }
-
-    .product-card {
-        break-inside: avoid;
-    }
-}
-/* ============================================
-   OPTIKS MECHATRONICS - PRODUCT CARDS CSS
-   ============================================
-   Complete Working Code
-   Version: 1.0.0
-   ============================================ */
-
-/* ============================================
-   1. CSS VARIABLES & DESIGN SYSTEM
-   ============================================ */
-:root {
-    /* Brand Colors */
-    --color-primary: #E53935;
-    --color-secondary: #2F5BFF;
-    --color-white: #FFFFFF;
-    --color-light-grey: #F4F6F8;
-    --color-silver: #E5E7EB;
-    --color-dark: #1F2937;
-    --color-text: #4B5563;
-    --color-text-light: #6B7280;
-    
-    /* Spacing */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-2xl: 3rem;
-    
-    /* Border Radius */
-    --radius-sm: 0.375rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-2xl: 1.5rem;
-    --radius-full: 9999px;
-    
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    
-    /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-base: 300ms ease;
-    --transition-slow: 500ms ease;
-}
-
-/* ============================================
-   2. PRODUCT GRID LAYOUT
-   ============================================ */
-.products-section {
-    padding: var(--spacing-3xl) var(--spacing-lg);
-    background-color: var(--color-white);
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: var(--spacing-3xl);
-}
-
-.section-badge {
-    display: inline-block;
-    padding: var(--spacing-sm) var(--spacing-xl);
-    background-color: rgba(47, 91, 255, 0.1);
-    color: var(--color-secondary);
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: var(--radius-full);
-    margin-bottom: var(--spacing-md);
-}
-
-.section-title {
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: -1px;
-    margin-bottom: var(--spacing-md);
-    color: var(--color-dark);
-}
-
-.section-subtitle {
-    font-size: 18px;
-    color: var(--color-text);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.section-divider {
-    width: 80px;
-    height: 4px;
-    background-color: var(--color-primary);
-    margin: var(--spacing-lg) auto 0;
-    border-radius: var(--radius-full);
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-2xl);
-}
-
-/* ============================================
-   3. PRODUCT CARD BASE STYLES
-   ============================================ */
-.product-card {
-    background-color: var(--color-white);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--color-silver);
-    transition: var(--transition-base);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-/* ============================================
-   4. HOVER ANIMATION & SHADOW EFFECT
-   ============================================ */
-.product-card:hover {
-    box-shadow: var(--shadow-xl);
-    transform: translateY(-8px);
-    border-color: var(--color-secondary);
-}
-
-/* ============================================
-   5. IMAGE CONTAINER & SCALING
-   ============================================ */
-.product-image {
-    position: relative;
-    width: 100%;
-    height: 240px;
-    background-color: var(--color-light-grey);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.product-image::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(47, 91, 255, 0.05) 0%, rgba(229, 57, 53, 0.05) 100%);
-    opacity: 0;
-    transition: var(--transition-base);
-    pointer-events: none;
-}
-
-.product-card:hover .product-image::before {
-    opacity: 1;
-}
-
-.product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
-    transform: scale(1);
-}
-
-/* Image Scaling Effect on Hover */
-.product-card:hover .product-image img {
-    transform: scale(1.1);
-}
-
-/* ============================================
-   6. PRODUCT BADGES
-   ============================================ */
-.product-badges {
-    position: absolute;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    z-index: 10;
-}
-
-.product-badge {
-    padding: var(--spacing-xs) var(--spacing-md);
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: var(--radius-full);
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-}
-
-.product-badge.wattage {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
-}
-
-.product-badge.ip {
-    background-color: rgba(229, 57, 53, 0.1);
-    color: var(--color-primary);
-}
-
-/* ============================================
-   7. PRODUCT CONTENT
-   ============================================ */
-.product-content {
-    padding: var(--spacing-lg);
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.product-name {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: var(--spacing-sm);
-    line-height: 1.4;
-    color: var(--color-dark);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.product-description {
-    font-size: 14px;
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-md);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.product-specs {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
-}
-
-.spec-item {
-    background-color: var(--color-light-grey);
-    padding: var(--spacing-sm);
-    border-radius: var(--radius-md);
-    text-align: center;
-}
-
-.spec-label {
-    font-size: 11px;
-    color: var(--color-text-light);
-    display: block;
-    margin-bottom: var(--spacing-xs);
-}
-
-.spec-value {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--color-dark);
-}
-
-/* ============================================
-   8. PRODUCT ACTIONS
-   ============================================ */
-.product-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-}
-
-.view-details {
-    color: var(--color-secondary);
-    font-size: 14px;
-    font-weight: 600;
-    transition: var(--transition-fast);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-}
-
-.view-details:hover {
-    color: var(--color-primary);
-}
-
-.add-to-cart {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-full);
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition-fast);
-    box-shadow: var(--shadow-sm);
-}
-
-.add-to-cart:hover {
-    background-color: #c92a26;
-    transform: scale(1.1);
-    box-shadow: var(--shadow-md);
-}
-
-/* ============================================
-   9. LOADING & ERROR STATES
-   ============================================ */
-.product-card.loading {
-    pointer-events: none;
-    opacity: 0.6;
-}
-
-.product-card.loading .product-image {
-    background: linear-gradient(90deg, var(--color-light-grey) 25%, var(--color-silver) 50%, var(--color-light-grey) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-.product-card.error {
-    border-color: var(--color-primary);
-    background-color: rgba(229, 57, 53, 0.05);
-}
-
-/* ============================================
-   10. RESPONSIVE DESIGN
-   ============================================ */
-
-/* Tablet (768px - 1024px) */
-@media (max-width: 1024px) {
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .product-image {
-        height: 220px;
-    }
-}
-
-/* Mobile (< 768px) */
-@media (max-width: 768px) {
-    .products-section {
-        padding: var(--spacing-2xl) var(--spacing-md);
-    }
-    
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-md);
-    }
-    
-    .product-image {
-        height: 200px;
-    }
-    
-    .product-card:hover {
-        transform: translateY(-4px);
-    }
-    
-    .product-name {
-        font-size: 16px;
-    }
-    
-    .product-content {
-        padding: var(--spacing-md);
-    }
-    
-    .section-title {
-        font-size: 32px;
-    }
-}
-
-/* Large Desktop (> 1280px) */
-@media (min-width: 1280px) {
-    .product-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .product-card {
-        border-radius: var(--radius-2xl);
-    }
-}
-
-/* ============================================
-   11. ACCESSIBILITY & FOCUS STATES
-   ============================================ */
-.product-card:focus-within {
-    box-shadow: 0 0 0 3px rgba(47, 91, 255, 0.3);
-    border-color: var(--color-secondary);
-}
-
-.product-card a:focus,
-.product-card button:focus {
-    outline: 2px solid var(--color-secondary);
-    outline-offset: 2px;
-}
-
-/* ============================================
-   12. PRINT STYLES
-   ============================================ */
-@media print {
-    .product-card {
-        break-inside: avoid;
-        box-shadow: none;
-        border: 1px solid #ccc;
-    }
-    
-    .product-card:hover {
-        transform: none;
-    }
-    
-    .product-image img {
-        transform: none !important;
-    }
-}
-/* ============================================
-   13. ADDITIONAL UTILITY CLASSES
-   ============================================ */
-
-/* Flexbox Utilities */
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.flex-wrap { flex-wrap: wrap; }
-.items-center { align-items: center; }
-.items-start { align-items: flex-start; }
-.items-end { align-items: flex-end; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.justify-start { justify-content: flex-start; }
-.justify-end { justify-content: flex-end; }
-.gap-xs { gap: var(--spacing-xs); }
-.gap-sm { gap: var(--spacing-sm); }
-.gap-md { gap: var(--spacing-md); }
-.gap-lg { gap: var(--spacing-lg); }
-.gap-xl { gap: var(--spacing-xl); }
-
-/* Grid Utilities */
-.grid { display: grid; }
-.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
-.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
-.gap-sm { gap: var(--spacing-sm); }
-.gap-md { gap: var(--spacing-md); }
-.gap-lg { gap: var(--spacing-lg); }
-
-/* Spacing Utilities */
-.m-0 { margin: 0; }
-.m-1 { margin: var(--spacing-sm); }
-.m-2 { margin: var(--spacing-md); }
-.m-3 { margin: var(--spacing-lg); }
-.m-4 { margin: var(--spacing-xl); }
-.mt-0 { margin-top: 0; }
-.mt-1 { margin-top: var(--spacing-sm); }
-.mt-2 { margin-top: var(--spacing-md); }
-.mt-3 { margin-top: var(--spacing-lg); }
-.mt-4 { margin-top: var(--spacing-xl); }
-.mb-0 { margin-bottom: 0; }
-.mb-1 { margin-bottom: var(--spacing-sm); }
-.mb-2 { margin-bottom: var(--spacing-md); }
-.mb-3 { margin-bottom: var(--spacing-lg); }
-.mb-4 { margin-bottom: var(--spacing-xl); }
-.p-0 { padding: 0; }
-.p-1 { padding: var(--spacing-sm); }
-.p-2 { padding: var(--spacing-md); }
-.p-3 { padding: var(--spacing-lg); }
-.p-4 { padding: var(--spacing-xl); }
-
-/* Text Utilities */
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-.text-sm { font-size: 14px; }
-.text-base { font-size: 16px; }
-.text-lg { font-size: 18px; }
-.text-xl { font-size: 20px; }
-.text-2xl { font-size: 24px; }
-.text-3xl { font-size: 30px; }
-.text-4xl { font-size: 36px; }
-.font-bold { font-weight: 700; }
-.font-semibold { font-weight: 600; }
-.font-medium { font-weight: 500; }
-.font-normal { font-weight: 400; }
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-secondary); }
-.text-dark { color: var(--color-dark); }
-.text-light { color: var(--color-text-light); }
-
-/* Visibility Utilities */
-.hidden { display: none !important; }
-.block { display: block; }
-.inline-block { display: inline-block; }
-.flex { display: flex; }
-.invisible { visibility: hidden; }
-.visible { visibility: visible; }
-
-/* ============================================
-   14. ANIMATION KEYFRAMES
-   ============================================ */
-
-/* Fade In Up Animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Fade In Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -2042,7 +1159,6 @@ input, textarea, select {
     }
 }
 
-/* Pulse Animation */
 @keyframes pulse {
     0%, 100% {
         opacity: 1;
@@ -2052,7 +1168,6 @@ input, textarea, select {
     }
 }
 
-/* Spin Animation */
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -2062,7 +1177,6 @@ input, textarea, select {
     }
 }
 
-/* Shimmer Animation */
 @keyframes shimmer {
     0% {
         background-position: 200% 0;
@@ -2072,7 +1186,6 @@ input, textarea, select {
     }
 }
 
-/* Slide In Animation */
 @keyframes slideIn {
     from {
         transform: translateX(-100%);
@@ -2084,7 +1197,6 @@ input, textarea, select {
     }
 }
 
-/* Scale Animation */
 @keyframes scaleIn {
     from {
         transform: scale(0.9);
@@ -2130,7 +1242,6 @@ input, textarea, select {
 /* ============================================
    16. SCROLLBAR STYLING
    ============================================ */
-/* Webkit Browsers */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -2151,12 +1262,6 @@ input, textarea, select {
     background: var(--color-text-light);
 }
 
-/* Firefox */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-silver) var(--color-light-grey);
-}
-
 /* ============================================
    17. FOCUS VISIBLE STYLING
    ============================================ */
@@ -2166,448 +1271,257 @@ input, textarea, select {
 }
 
 /* ============================================
-   18. DARK MODE SUPPORT (Optional)
+   18. UTILITY CLASSES
    ============================================ */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-white: #1F2937;
-        --color-light-grey: #111827;
-        --color-silver: #374151;
-        --color-dark: #F9FAFB;
-        --color-text: #D1D5DB;
-        --color-text-light: #9CA3AF;
-    }
-    
-    .product-card {
-        background-color: var(--color-light-grey);
-        border-color: var(--color-silver);
-    }
-    
-    .product-name {
-        color: var(--color-dark);
-    }
-    
-    .product-description {
-        color: var(--color-text-light);
-    }
-}
-
-/* ============================================
-   19. REDUCED MOTION SUPPORT
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    
-    .product-card:hover {
-        transform: none;
-    }
-    
-    .product-image img {
-        transition: none;
-    }
-}
-
-/* ============================================
-   20. FINAL CLOSING
-   ============================================ */
-/* End of Product Cards CSS */
-/* ============================================
-   21. MODAL WINDOW STYLING
-   ============================================ */
-
-/* Modal Overlay - Backdrop with Blur */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-lg);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-base), visibility var(--transition-base);
-}
-
-/* Modal Overlay Active State */
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Modal Container - Centered */
-.modal-container {
-    background-color: var(--color-white);
-    border-radius: var(--radius-2xl);
-    max-width: 1000px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: var(--shadow-2xl);
-    transform: scale(0.9);
-    opacity: 0;
-    transition: transform var(--transition-base), opacity var(--transition-base);
-    position: relative;
-}
-
-/* Modal Container Active State - Smooth Opening */
-.modal-overlay.active .modal-container {
-    transform: scale(1);
-    opacity: 1;
-}
-
-/* Modal Close Button */
-.modal-close {
-    position: absolute;
-    top: var(--spacing-lg);
-    right: var(--spacing-lg);
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-full);
-    background-color: var(--color-white);
-    color: var(--color-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition-fast);
-    z-index: 10;
-}
-
-.modal-close:hover {
-    background-color: var(--color-light-grey);
-    transform: rotate(90deg);
-}
-
-.modal-close svg {
-    width: 24px;
-    height: 24px;
-}
-
-/* Modal Content Layout */
-.modal-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xl);
-    padding: var(--spacing-xl);
-}
-
-/* Modal Image Section */
-.modal-image {
-    height: 400px;
-    background-color: var(--color-light-grey);
-    border-radius: var(--radius-xl);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-}
-
-.modal-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
-}
-
-.modal-image:hover img {
-    transform: scale(1.05);
-}
-
-/* Modal Info Section */
-.modal-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-}
-
-/* Modal Category Badge */
-.modal-category {
-    display: inline-block;
-    padding: var(--spacing-sm) var(--spacing-md);
-    background-color: rgba(47, 91, 255, 0.1);
-    color: var(--color-secondary);
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: var(--radius-full);
-    width: fit-content;
-}
-
-/* Modal Title */
-.modal-title {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--color-dark);
-}
-
-/* Modal Description */
-.modal-description {
-    font-size: 16px;
-    color: var(--color-text);
-    line-height: 1.6;
-}
-
-/* Modal Specifications Section */
-.modal-specs {
-    background-color: var(--color-light-grey);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-lg);
-}
-
-.modal-specs h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    color: var(--color-dark);
-}
-
-.modal-specs-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-}
-
-.modal-spec-item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-}
-
-.modal-spec-label {
-    font-size: 12px;
-    color: var(--color-text-light);
-}
-
-.modal-spec-value {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-dark);
-}
-
-/* Modal Customization Section */
-.modal-customization {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
-.modal-custom-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-md);
-    background-color: var(--color-light-grey);
-    border-radius: var(--radius-md);
-}
-
-.modal-custom-label {
-    font-size: 14px;
-    color: var(--color-text);
-}
-
-.modal-custom-value {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-dark);
-}
-
-/* Modal Protection Ratings */
-.modal-protection {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-}
-
-.modal-protection-item {
-    background-color: var(--color-light-grey);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-lg);
+.text-center {
     text-align: center;
 }
 
-.modal-protection-value {
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
+.text-base {
+    font-size: 16px;
+}
+
+.text-lg {
+    font-size: 18px;
+}
+
+.text-xl {
+    font-size: 20px;
+}
+
+.text-2xl {
     font-size: 24px;
+}
+
+.text-3xl {
+    font-size: 30px;
+}
+
+.text-4xl {
+    font-size: 36px;
+}
+
+.font-bold {
     font-weight: 700;
-    margin-bottom: var(--spacing-xs);
 }
 
-.modal-protection-value.ip {
-    color: var(--color-secondary);
+.font-semibold {
+    font-weight: 600;
 }
 
-.modal-protection-value.ik {
+.font-medium {
+    font-weight: 500;
+}
+
+.font-normal {
+    font-weight: 400;
+}
+
+.text-primary {
     color: var(--color-primary);
 }
 
-.modal-protection-label {
-    font-size: 12px;
+.text-secondary {
+    color: var(--color-secondary);
+}
+
+.text-dark {
+    color: var(--color-dark);
+}
+
+.text-light {
     color: var(--color-text-light);
 }
 
-/* Modal Actions */
-.modal-actions {
+.hidden {
+    display: none !important;
+}
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.flex {
     display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-start {
+    align-items: flex-start;
+}
+
+.items-end {
+    align-items: flex-end;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.gap-xs {
+    gap: var(--spacing-xs);
+}
+
+.gap-sm {
+    gap: var(--spacing-sm);
+}
+
+.gap-md {
     gap: var(--spacing-md);
+}
+
+.gap-lg {
+    gap: var(--spacing-lg);
+}
+
+.gap-xl {
+    gap: var(--spacing-xl);
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.m-1 {
+    margin: var(--spacing-sm);
+}
+
+.m-2 {
+    margin: var(--spacing-md);
+}
+
+.m-3 {
+    margin: var(--spacing-lg);
+}
+
+.m-4 {
+    margin: var(--spacing-xl);
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mt-1 {
+    margin-top: var(--spacing-sm);
+}
+
+.mt-2 {
     margin-top: var(--spacing-md);
 }
 
-.modal-actions .btn {
-    flex: 1;
+.mt-3 {
+    margin-top: var(--spacing-lg);
+}
+
+.mt-4 {
+    margin-top: var(--spacing-xl);
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-1 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.mb-2 {
+    margin-bottom: var(--spacing-md);
+}
+
+.mb-3 {
+    margin-bottom: var(--spacing-lg);
+}
+
+.mb-4 {
+    margin-bottom: var(--spacing-xl);
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.p-1 {
+    padding: var(--spacing-sm);
+}
+
+.p-2 {
+    padding: var(--spacing-md);
+}
+
+.p-3 {
+    padding: var(--spacing-lg);
+}
+
+.p-4 {
+    padding: var(--spacing-xl);
 }
 
 /* ============================================
-   22. MODAL RESPONSIVE DESIGN
+   19. LOADING STATES
    ============================================ */
-
-/* Tablet (768px - 1024px) */
-@media (max-width: 1024px) {
-    .modal-content {
-        grid-template-columns: 1fr;
-        padding: var(--spacing-lg);
-    }
-    
-    .modal-image {
-        height: 300px;
-    }
-    
-    .modal-title {
-        font-size: 24px;
-    }
-    
-    .modal-actions {
-        flex-direction: column;
-    }
+.product-card.loading {
+    pointer-events: none;
+    opacity: 0.6;
 }
 
-/* Mobile (< 768px) */
-@media (max-width: 768px) {
-    .modal-overlay {
-        padding: var(--spacing-md);
-    }
-    
-    .modal-container {
-        max-height: 95vh;
-        border-radius: var(--radius-xl);
-    }
-    
-    .modal-content {
-        padding: var(--spacing-md);
-    }
-    
-    .modal-image {
-        height: 250px;
-    }
-    
-    .modal-title {
-        font-size: 20px;
-    }
-    
-    .modal-specs-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .modal-protection {
-        grid-template-columns: 1fr;
-    }
-    
-    .modal-close {
-        top: var(--spacing-md);
-        right: var(--spacing-md);
-        width: 40px;
-        height: 40px;
-    }
-}
-
-/* Large Desktop (> 1280px) */
-@media (min-width: 1280px) {
-    .modal-container {
-        max-width: 1200px;
-    }
-    
-    .modal-content {
-        padding: var(--spacing-2xl);
-    }
-    
-    .modal-image {
-        height: 450px;
-    }
+.product-card.loading .product-image {
+    background: linear-gradient(90deg, var(--color-light-grey) 25%, var(--color-silver) 50%, var(--color-light-grey) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
 }
 
 /* ============================================
-   23. MODAL ACCESSIBILITY
+   20. ERROR STATES
    ============================================ */
-
-/* Focus Trap for Modal */
-.modal-overlay:focus {
-    outline: none;
-}
-
-.modal-container:focus {
-    outline: none;
-}
-
-/* Keyboard Navigation */
-.modal-overlay.active {
-    pointer-events: auto;
-}
-
-/* Prevent Body Scroll When Modal Open */
-body.modal-open {
-    overflow: hidden;
+.product-card.error {
+    border-color: var(--color-primary);
+    background-color: rgba(229, 57, 53, 0.05);
 }
 
 /* ============================================
-   24. MODAL ANIMATION ENHANCEMENTS
+   21. MODAL LOADING STATE
    ============================================ */
-
-/* Staggered Content Animation */
-.modal-content {
-    animation: modalContentFadeIn 0.4s ease-out 0.1s backwards;
-}
-
-@keyframes modalContentFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Image Zoom Animation on Modal Open */
-.modal-image {
-    animation: modalImageZoom 0.5s ease-out;
-}
-
-@keyframes modalImageZoom {
-    from {
-        transform: scale(0.95);
-    }
-    to {
-        transform: scale(1);
-    }
-}
-
-/* ============================================
-   25. MODAL LOADING STATE
-   ============================================ */
-
 .modal-overlay.loading .modal-container {
     opacity: 0.6;
     pointer-events: none;
@@ -2628,9 +1542,8 @@ body.modal-open {
 }
 
 /* ============================================
-   26. MODAL ERROR STATE
+   22. MODAL ERROR STATE
    ============================================ */
-
 .modal-overlay.error .modal-container {
     border-color: var(--color-primary);
     box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.1);
@@ -2642,32 +1555,8 @@ body.modal-open {
 }
 
 /* ============================================
-   27. MODAL PRINT STYLES
+   23. MODAL SCROLLBAR STYLING
    ============================================ */
-
-@media print {
-    .modal-overlay {
-        display: none !important;
-    }
-}
-
-/* ============================================
-   28. MODAL PERFORMANCE OPTIMIZATION
-   ============================================ */
-
-/* Hardware Acceleration */
-.modal-container {
-    will-change: transform, opacity;
-}
-
-.modal-overlay {
-    will-change: opacity;
-}
-
-/* ============================================
-   29. MODAL SCROLLBAR STYLING
-   ============================================ */
-
 .modal-container::-webkit-scrollbar {
     width: 8px;
 }
@@ -2687,7 +1576,58 @@ body.modal-open {
 }
 
 /* ============================================
-   30. MODAL FINAL CLOSING
+   24. PRINT STYLES
    ============================================ */
+@media print {
+    .header,
+    .hero,
+    .modal-overlay,
+    .mobile-menu {
+        display: none;
+    }
+    
+    body {
+        background-color: white;
+    }
+    
+    .product-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .product-card:hover {
+        transform: none;
+    }
+    
+    .product-image img {
+        transform: none !important;
+    }
+    
+    .modal-overlay {
+        display: none !important;
+    }
+}
 
-/* End of Modal Window CSS */
+/* ============================================
+   25. PERFORMANCE OPTIMIZATION
+   ============================================ */
+.modal-container {
+    will-change: transform, opacity;
+}
+
+.modal-overlay {
+    will-change: opacity;
+}
+
+/* ============================================
+   26. ACCESSIBILITY
+   ============================================ */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* ============================================
+   27. FINAL CLOSING
+   ============================================ */
+/* End of Optiks Mechatronics Desktop CSS (1200px+) */
