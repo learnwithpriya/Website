@@ -59,26 +59,32 @@ function parseCSV(csvText) {
 async function fetchProducts() {
     try {
         loading.classList.remove('hidden');
-        error.classList.add('hidden');
-        noResults.classList.add('hidden');
-        
+        document.getElementById("error").classList.add('hidden');
+
         const response = await fetch('Product.csv');
+
         if (!response.ok) {
             throw new Error('Failed to fetch products');
         }
+
         const csvText = await response.text();
+
         products = parseCSV(csvText);
         filteredProducts = [...products];
-        
+
         renderProducts(filteredProducts);
         updateProductCount();
+
         loading.classList.add('hidden');
-    } catch (error) {
-        console.error('Error fetching products:', error);
+
+    } catch (err) {
+        console.error('Error fetching products:', err);
         loading.classList.add('hidden');
-        error.classList.remove('hidden');
+        document.getElementById("error").classList.remove('hidden');
     }
 }
+
+document.addEventListener("DOMContentLoaded", fetchProducts);
 
 // ============================================
 // UPDATE PRODUCT COUNT
