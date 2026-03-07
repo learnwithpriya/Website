@@ -1,0 +1,7 @@
+# Optiks Mechatronics - Smart Lighting Technology Website
+
+## 🚀 Project Overview
+
+A modern, futuristic corporate website for Optiks Mechatronics, a leading lighting technology company. Built with HTML5, Tailwind CSS, and JavaScript.
+
+## 📁 Project Structure

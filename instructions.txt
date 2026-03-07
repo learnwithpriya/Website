@@ -1,0 +1,11 @@
+optiks-website/
+│
+├── index.html
+├── products.csv
+├── script.js
+├── css
+│   └── styles.css
+├── assets
+│   ├── images
+│   └── models
+└── README.md
