@@ -14,54 +14,44 @@ let currentProduct = null;
 let filteredProducts = [];
 let searchQuery = '';
 let selectedCategory = 'all';
+let comparisonList = [];
 
 // ============================================
 // DOM ELEMENTS
 // ============================================
 const productGrid = document.getElementById('product-grid');
-const loading = document.getElementById('loading');
-const error = document.getElementById('error');
-const noResults = document.getElementById('no-results');
-const productCount = document.getElementById('product-count');
 const productModal = document.getElementById('product-modal');
-const modalBackdrop = document.getElementById('modal-backdrop');
 const closeModal = document.getElementById('close-modal');
 const productSearch = document.getElementById('product-search');
-const categoryFilter = document.getElementById('category-filter');
 const cartCount = document.getElementById('cart-count');
 const addToCartBtn = document.getElementById('add-to-cart-btn');
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+const contactForm = document.getElementById('contact-form');
+const newsletterForm = document.getElementById('newsletter-form');
+const newsletterEmail = document.getElementById('newsletter-email');
 
 // ============================================
 // CSV PARSING
 // ============================================
 function parseCSV(text) {
-
-const lines = text.trim().split("\n");
-const headers = lines[0].split(",");
-
-const data = [];
-
-for (let i = 1; i < lines.length; i++) {
-
-const values = lines[i].split(",");
-
-let obj = {};
-
-headers.forEach((header,index)=>{
-
-obj[header.trim()] = values[index] ? values[index].trim() : "";
-
-});
-
-data.push(obj);
-
-}
-
-return data;
-
+    const lines = text.trim().split("\n");
+    const headers = lines[0].split(",");
+    const data = [];
+    
+    for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(",");
+        let obj = {};
+        
+        headers.forEach((header, index) => {
+            obj[header.trim()] = values[index] ? values[index].trim() : "";
+        });
+        
+        data.push(obj);
+    }
+    
+    return data;
 }
 
 // ============================================
@@ -69,10 +59,6 @@ return data;
 // ============================================
 async function fetchProducts() {
     try {
-        if (loading) loading.classList.remove('hidden');
-        if (error) error.classList.add('hidden');
-        if (noResults) noResults.classList.add('hidden');
-        
         const response = await fetch('Product.csv');
         if (!response.ok) {
             throw new Error('Failed to fetch products');
@@ -83,11 +69,15 @@ async function fetchProducts() {
         
         renderProducts(filteredProducts);
         updateProductCount();
-        if (loading) loading.classList.add('hidden');
     } catch (error) {
         console.error('Error fetching products:', error);
-        if (loading) loading.classList.add('hidden');
-        if (error) error.classList.remove('hidden');
+        if (productGrid) {
+            productGrid.innerHTML = `
+                <div class="col-span-3 text-center py-12">
+                    <p class="text-red-500">Failed to load products. Please try again later.</p>
+                </div>
+            `;
+        }
     }
 }
 
@@ -95,10 +85,11 @@ async function fetchProducts() {
 // UPDATE PRODUCT COUNT
 // ============================================
 function updateProductCount() {
+    const productCount = document.getElementById('product-count');
     if (productCount) {
         productCount.innerHTML = `
-            <span class="text-lg font-semibold text-brand-blue">${filteredProducts.length}</span>
-            <span class="text-gray-500"> products available</span>
+            <span class="text-lg font-semibold text-secondary">${filteredProducts.length}</span>
+            <span class="text-text-light"> products available</span>
         `;
     }
 }
@@ -107,16 +98,18 @@ function updateProductCount() {
 // RENDER PRODUCTS
 // ============================================
 function renderProducts(productList) {
-    if (loading) loading.classList.add('hidden');
+    if (!productGrid) return;
     productGrid.innerHTML = '';
-
+    
     if (productList.length === 0) {
-        if (noResults) noResults.classList.remove('hidden');
+        productGrid.innerHTML = `
+            <div class="col-span-3 text-center py-12">
+                <p class="text-text-light">No products found matching your criteria.</p>
+            </div>
+        `;
         return;
     }
-
-    if (noResults) noResults.classList.add('hidden');
-
+    
     productList.forEach((product, index) => {
         const card = document.createElement('div');
         card.className = 'product-card animate-fade-in-up';
@@ -186,6 +179,7 @@ function setupSearch() {
 // CATEGORY FILTER
 // ============================================
 function setupCategoryFilter() {
+    const categoryFilter = document.getElementById('category-filter');
     if (!categoryFilter) return;
     
     categoryFilter.addEventListener('change', (e) => {
@@ -223,42 +217,44 @@ function openProductModal(productName) {
     currentProduct = product;
     
     // Populate modal content
-    document.getElementById('modal-product-name').textContent = product.name;
-    document.getElementById('modal-product-category').textContent = product.category;
-    document.getElementById('modal-product-description').textContent = product.description;
+    const modalProductName = document.getElementById('modal-product-name');
+    const modalProductCategory = document.getElementById('modal-product-category');
+    const modalProductDescription = document.getElementById('modal-product-description');
+    const modalSpecifications = document.getElementById('modal-specifications');
+    
+    if (modalProductName) modalProductName.textContent = product.name;
+    if (modalProductCategory) modalProductCategory.textContent = product.category;
+    if (modalProductDescription) modalProductDescription.textContent = product.description;
     
     // Populate specifications
-    const specsContainer = document.getElementById('modal-specifications');
-    specsContainer.innerHTML = `
-        <div class="modal-spec-item">
-            <span class="modal-spec-label">Size</span>
-            <span class="modal-spec-value">${product.size}</span>
-        </div>
-        <div class="modal-spec-item">
-            <span class="modal-spec-label">Beam Angle</span>
-            <span class="modal-spec-value">${product.beam_angle}</span>
-        </div>
-        <div class="modal-spec-item">
-            <span class="modal-spec-label">Lens Type</span>
-            <span class="modal-spec-value">${product.lens_type}</span>
-        </div>
-        <div class="modal-spec-item">
-            <span class="modal-spec-label">CCT</span>
-            <span class="modal-spec-value">${product.cct}</span>
-        </div>
-        <div class="modal-spec-item">
-            <span class="modal-spec-label">IP Rating</span>
-            <span class="modal-spec-value">IP${product.ip_rating}</span>
-        </div>
-        <div class="modal-spec-item">
-            <span class="modal-spec-label">IK Rating</span>
-            <span class="modal-spec-value">IK${product.ik_rating}</span>
-        </div>
-    `;
-    
-    // Update IP and IK ratings
-    document.getElementById('modal-ip-rating').textContent = product.ip_rating;
-    document.getElementById('modal-ik-rating').textContent = product.ik_rating;
+    if (modalSpecifications) {
+        modalSpecifications.innerHTML = `
+            <div class="modal-spec-item">
+                <span class="modal-spec-label">Size</span>
+                <span class="modal-spec-value">${product.size}</span>
+            </div>
+            <div class="modal-spec-item">
+                <span class="modal-spec-label">Beam Angle</span>
+                <span class="modal-spec-value">${product.beam_angle}</span>
+            </div>
+            <div class="modal-spec-item">
+                <span class="modal-spec-label">Lens Type</span>
+                <span class="modal-spec-value">${product.lens_type}</span>
+            </div>
+            <div class="modal-spec-item">
+                <span class="modal-spec-label">CCT</span>
+                <span class="modal-spec-value">${product.cct}</span>
+            </div>
+            <div class="modal-spec-item">
+                <span class="modal-spec-label">IP Rating</span>
+                <span class="modal-spec-value">IP${product.ip_rating}</span>
+            </div>
+            <div class="modal-spec-item">
+                <span class="modal-spec-label">IK Rating</span>
+                <span class="modal-spec-value">IK${product.ik_rating}</span>
+            </div>
+        `;
+    }
     
     // Show modal
     if (productModal) {
@@ -296,12 +292,14 @@ function addToCart(productName) {
         });
     }
     
+    saveCartToStorage();
     updateCartCount();
     showNotification('Product added to cart!', 'success');
 }
 
 function removeFromCart(productName) {
     cart = cart.filter(item => item.name !== productName);
+    saveCartToStorage();
     updateCartCount();
     showNotification('Product removed from cart!', 'info');
 }
@@ -324,7 +322,7 @@ function updateCartCount() {
 // ============================================
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
-    notification.className = `fixed bottom-4 right-4 px-6 py-4 rounded-lg shadow-lg z-50 animate-fade-in-up`;
+    notification.className = 'fixed bottom-4 right-4 px-6 py-4 rounded-lg shadow-lg z-50 animate-fade-in-up';
     
     const colors = {
         success: 'bg-green-500',
@@ -403,7 +401,7 @@ function setupScrollToTop() {
 // HEADER SCROLL EFFECT
 // ============================================
 function setupHeaderScroll() {
-    const header = document.querySelector('.header');
+    const header = document.querySelector('#main-header');
     
     if (!header) return;
     
@@ -417,51 +415,7 @@ function setupHeaderScroll() {
 }
 
 // ============================================
-// INITIALIZE ON PAGE LOAD
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all features
-    fetchProducts();
-    setupSearch();
-    setupCategoryFilter();
-    setupMobileMenu();
-    setupModalKeyboard();
-    setupScrollToTop();
-    setupHeaderScroll();
-    
-    // Close modal on backdrop click
-    if (modalBackdrop) {
-        modalBackdrop.addEventListener('click', closeModalFunction);
-    }
-    
-    // Close modal on close button click
-    if (closeModal) {
-        closeModal.addEventListener('click', closeModalFunction);
-    }
-    
-    // Add to cart button
-    if (addToCartBtn) {
-        addToCartBtn.addEventListener('click', () => {
-            if (currentProduct) {
-                addToCart(currentProduct.name);
-            }
-        });
-    }
-    
-    console.log('Optiks Mechatronics - All features initialized successfully!');
-});
-
-// ============================================
-// EXPORT FUNCTIONS FOR GLOBAL ACCESS
-// ============================================
-window.fetchProducts = fetchProducts;
-window.openProductModal = openProductModal;
-window.addToCart = addToCart;
-window.removeFromCart = removeFromCart;
-window.updateCartCount = updateCartCount;
-window.filterProducts = filterProducts;
-// ============================================
-// 31. LOCAL STORAGE PERSISTENCE
+// LOCAL STORAGE PERSISTENCE
 // ============================================
 function loadCartFromStorage() {
     const savedCart = localStorage.getItem('optiks-cart');
@@ -484,11 +438,8 @@ function saveCartToStorage() {
     }
 }
 
-// Initialize cart from storage
-loadCartFromStorage();
-
 // ============================================
-// 32. CART MANAGEMENT
+// CART MANAGEMENT
 // ============================================
 function getCartTotal() {
     return cart.reduce((total, item) => total + (item.price || 0) * item.quantity, 0);
@@ -515,7 +466,7 @@ function updateCartItemQuantity(productName, quantity) {
 }
 
 // ============================================
-// 33. SEARCH SUGGESTIONS
+// SEARCH SUGGESTIONS
 // ============================================
 function setupSearchSuggestions() {
     if (!productSearch) return;
@@ -527,7 +478,9 @@ function setupSearchSuggestions() {
     suggestionsContainer.style.overflowY = 'auto';
     suggestionsContainer.style.padding = 'var(--spacing-sm)';
     
-    productSearch.parentNode.appendChild(suggestionsContainer);
+    if (productSearch.parentNode) {
+        productSearch.parentNode.appendChild(suggestionsContainer);
+    }
     
     productSearch.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
@@ -543,9 +496,9 @@ function setupSearchSuggestions() {
         
         if (matches.length > 0) {
             suggestionsContainer.innerHTML = matches.map(product => `
-                <div class="search-suggestion-item p-3 hover:bg-brand-light-grey rounded cursor-pointer" onclick="selectSuggestion('${product.name}')">
-                    <div class="font-semibold text-brand-dark">${product.name}</div>
-                    <div class="text-sm text-brand-text-light">${product.category}</div>
+                <div class="search-suggestion-item p-3 hover:bg-light-grey rounded cursor-pointer" onclick="selectSuggestion('${product.name}')">
+                    <div class="font-semibold text-dark">${product.name}</div>
+                    <div class="text-sm text-text-light">${product.category}</div>
                 </div>
             `).join('');
             suggestionsContainer.classList.remove('hidden');
@@ -572,7 +525,7 @@ window.selectSuggestion = function(productName) {
 };
 
 // ============================================
-// 34. IMAGE LAZY LOADING
+// IMAGE LAZY LOADING
 // ============================================
 function setupLazyLoading() {
     const images = document.querySelectorAll('img[data-src]');
@@ -590,12 +543,9 @@ function setupLazyLoading() {
     
     images.forEach(img => imageObserver.observe(img));
 }
-
 // ============================================
-// 35. PRODUCT COMPARISON
+// PRODUCT COMPARISON
 // ============================================
-let comparisonList = [];
-
 function addToComparison(productName) {
     const product = products.find(p => p.name === productName);
     if (!product) return;
@@ -638,7 +588,6 @@ function compareProducts() {
         return;
     }
     
-    // Open comparison modal or view
     showComparisonModal();
 }
 
@@ -646,17 +595,19 @@ function showComparisonModal() {
     const modal = document.getElementById('comparison-modal');
     if (modal) {
         const tableBody = document.getElementById('comparison-table-body');
-        tableBody.innerHTML = comparisonList.map(product => `
-            <tr>
-                <td class="p-4 border-b">${product.name}</td>
-                <td class="p-4 border-b">${product.category}</td>
-                <td class="p-4 border-b">${product.size}</td>
-                <td class="p-4 border-b">${product.beam_angle}</td>
-                <td class="p-4 border-b">${product.cct}</td>
-                <td class="p-4 border-b">IP${product.ip_rating}</td>
-                <td class="p-4 border-b">IK${product.ik_rating}</td>
-            </tr>
-        `).join('');
+        if (tableBody) {
+            tableBody.innerHTML = comparisonList.map(product => `
+                <tr>
+                    <td class="p-4 border-b">${product.name}</td>
+                    <td class="p-4 border-b">${product.category}</td>
+                    <td class="p-4 border-b">${product.size}</td>
+                    <td class="p-4 border-b">${product.beam_angle}</td>
+                    <td class="p-4 border-b">${product.cct}</td>
+                    <td class="p-4 border-b">IP${product.ip_rating}</td>
+                    <td class="p-4 border-b">IK${product.ik_rating}</td>
+                </tr>
+            `).join('');
+        }
         
         modal.classList.add('active');
         document.body.classList.add('modal-open');
@@ -664,16 +615,15 @@ function showComparisonModal() {
 }
 
 // ============================================
-// 36. NEWSLETTER SUBSCRIPTION
+// NEWSLETTER SUBSCRIPTION
 // ============================================
 function setupNewsletter() {
-    const newsletterForm = document.getElementById('newsletter-form');
-    if (!newsletterForm) return;
+    if (!newsletterForm || !newsletterEmail) return;
     
     newsletterForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        const email = document.getElementById('newsletter-email').value;
+        const email = newsletterEmail.value;
         
         if (!isValidEmail(email)) {
             showNotification('Please enter a valid email address', 'error');
@@ -697,10 +647,9 @@ function isValidEmail(email) {
 }
 
 // ============================================
-// 37. CONTACT FORM VALIDATION
+// CONTACT FORM VALIDATION
 // ============================================
 function setupContactForm() {
-    const contactForm = document.getElementById('contact-form');
     if (!contactForm) return;
     
     contactForm.addEventListener('submit', (e) => {
@@ -746,7 +695,7 @@ function setupContactForm() {
 }
 
 // ============================================
-// 38. SMOOTH SCROLLING
+// SMOOTH SCROLLING
 // ============================================
 function setupSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -764,7 +713,7 @@ function setupSmoothScrolling() {
 }
 
 // ============================================
-// 39. PAGE LOADING ANIMATION
+// PAGE LOADING ANIMATION
 // ============================================
 function setupPageLoading() {
     const loader = document.getElementById('page-loader');
@@ -776,7 +725,7 @@ function setupPageLoading() {
 }
 
 // ============================================
-// 40. PERFORMANCE OPTIMIZATION
+// PERFORMANCE OPTIMIZATION
 // ============================================
 function debounce(func, wait) {
     let timeout;
@@ -802,7 +751,7 @@ function throttle(func, limit) {
 }
 
 // ============================================
-// 41. ERROR HANDLING
+// ERROR HANDLING
 // ============================================
 window.onerror = function(message, source, lineno, colno, error) {
     console.error('Global Error:', {
@@ -818,7 +767,7 @@ window.onerror = function(message, source, lineno, colno, error) {
 };
 
 // ============================================
-// 42. SERVICE WORKER REGISTRATION (PWA)
+// SERVICE WORKER REGISTRATION (PWA)
 // ============================================
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
@@ -835,7 +784,7 @@ function registerServiceWorker() {
 }
 
 // ============================================
-// 43. ANALYTICS TRACKING (Optional)
+// ANALYTICS TRACKING (Optional)
 // ============================================
 function trackEvent(category, action, label) {
     if (window.gtag) {
@@ -847,7 +796,7 @@ function trackEvent(category, action, label) {
 }
 
 // ============================================
-// 44. UTILITY FUNCTIONS
+// UTILITY FUNCTIONS
 // ============================================
 function formatPrice(price) {
     return new Intl.NumberFormat('en-IN', {
@@ -870,16 +819,49 @@ function truncateText(text, maxLength) {
 }
 
 // ============================================
-// 45. FINAL INITIALIZATION
+// FINAL INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Additional initialization
+    // Initialize cart from storage
+    loadCartFromStorage();
+    
+    // Initialize all features
+    fetchProducts();
+    setupSearch();
+    setupCategoryFilter();
+    setupMobileMenu();
+    setupModalKeyboard();
+    setupScrollToTop();
+    setupHeaderScroll();
     setupSearchSuggestions();
     setupLazyLoading();
     setupNewsletter();
     setupContactForm();
     setupSmoothScrolling();
     setupPageLoading();
+    
+    // Close modal on backdrop click
+    if (productModal) {
+        productModal.addEventListener('click', (e) => {
+            if (e.target === productModal) {
+                closeModalFunction();
+            }
+        });
+    }
+    
+    // Close modal on close button click
+    if (closeModal) {
+        closeModal.addEventListener('click', closeModalFunction);
+    }
+    
+    // Add to cart button
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', () => {
+            if (currentProduct) {
+                addToCart(currentProduct.name);
+            }
+        });
+    }
     
     // Log initialization
     console.log('Optiks Mechatronics - All features initialized successfully!');
@@ -889,7 +871,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// 46. EXPORT ALL FUNCTIONS
+// EXPORT ALL FUNCTIONS
 // ============================================
 window.fetchProducts = fetchProducts;
 window.openProductModal = openProductModal;
@@ -908,6 +890,8 @@ window.clearCart = clearCart;
 window.updateCartItemQuantity = updateCartItemQuantity;
 window.getCartTotal = getCartTotal;
 window.getCartItems = getCartItems;
+window.showNotification = showNotification;
+window.closeModalFunction = closeModalFunction;
 
 // ============================================
 // END OF JAVASCRIPT
