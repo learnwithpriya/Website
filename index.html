@@ -45,57 +45,55 @@
          HEADER NAVIGATION
          ============================================ -->
     <header class="fixed w-full top-0 z-50 bg-white shadow-sm" id="main-header">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center h-20">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex justify-between items-center h-20">
+            
+            <!-- LOGO -->
+            <div class="flex items-center">
+                <a href="#home" class="flex items-center">
+                    <img src="assets/images/optiks-logo.jpeg" alt="Optiks Logo" class="h-12 object-contain">
+                </a>
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav class="hidden lg:flex space-x-1">
+                <a href="#home" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">HOME</a>
+                <a href="#about" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">ABOUT US</a>
+                <a href="#products" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">PRODUCTS</a>
+                <a href="#innovation" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">INNOVATION</a>
+                <a href="#presence" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">PRESENCE</a>
+                <a href="#investors" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">INVESTORS</a>
+                <a href="#sustainability" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">SUSTAINABILITY</a>
+                <a href="#newsroom" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">NEWSROOM</a>
+                <a href="#talent" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">TALENT</a>
+                <a href="#contact" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">CONTACT</a>
+            </nav>
+
+            <!-- ICONS -->
+            <div class="flex items-center gap-4">
+                <button class="text-text hover:text-secondary transition" id="search-btn">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
                 
-                <!-- LOGO -->
-                <div class="flex items-center">
-                    <a href="#home" class="flex items-center gap-3">
-                        <img src="optiks%20logo.jpeg" alt="Optiks Logo" class="h-12 object-contain">
-                        <div class="flex flex-col">
-                            <span class="text-lg font-bold text-dark"></span>
-                            <span class="text-xs font-semibold text-secondary tracking-widest"></span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Navigation Menu -->
-                <nav class="hidden lg:flex space-x-1">
-                    <a href="#home" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">HOME</a>
-                    <a href="#about" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">ABOUT US</a>
-                    <a href="#products" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">PRODUCTS</a>
-                    <a href="#innovation" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">INNOVATION</a>
-                    <a href="#presence" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">PRESENCE</a>
-                    <a href="#investors" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">INVESTORS</a>
-                    <a href="#sustainability" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">SUSTAINABILITY</a>
-                    <a href="#newsroom" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">NEWSROOM</a>
-                    <a href="#talent" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">TALENT</a>
-                    <a href="#contact" class="nav-link px-4 py-2 text-sm font-medium text-text hover:text-secondary hover:bg-light-grey rounded-lg transition">CONTACT</a>
-                </nav>
-
-                <!-- Icons -->
-                <div class="flex items-center space-x-4">
-                    <button class="text-text hover:text-secondary transition" id="search-btn">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </button>
-                    <button class="text-text hover:text-secondary transition relative" id="cart-btn">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                        </svg>
-                        <span class="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-xs rounded-full flex items-center justify-center" id="cart-count">0</span>
-                    </button>
-                    <!-- Mobile Menu Button -->
-                    <button class="lg:hidden text-text hover:text-secondary transition" id="mobile-menu-btn">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+                <button class="text-text hover:text-secondary transition relative" id="cart-btn">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
+                    <span id="cart-count" class="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-xs rounded-full flex items-center justify-center">0</span>
+                </button>
+                
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden text-text hover:text-secondary transition" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
         </div>
-    </header>
+    </div>
+</header>
     
     <!-- ============================================
          HERO SECTION
