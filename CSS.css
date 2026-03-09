@@ -111,7 +111,7 @@ input, textarea, select {
 /* ============================================
    3. HEADER NAVIGATION BAR
    ============================================ */
-.header {
+#main-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -124,59 +124,31 @@ input, textarea, select {
     transition: var(--transition-base);
 }
 
-.header.scrolled {
+#main-header.scrolled {
     box-shadow: var(--shadow-md);
     background-color: rgba(255, 255, 255, 0.98);
 }
 
-.header-container {
+#main-header .max-w-7xl {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 var(--spacing-xl);
+}
+
+#main-header .flex {
     height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
     cursor: pointer;
 }
 
-.logo-icon {
-    width: 48px;
+.logo img {
     height: 48px;
-    background-color: var(--color-primary);
-    border-radius: var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-white);
-    font-size: 24px;
-    font-weight: 700;
-    box-shadow: var(--shadow-md);
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.logo-text h1 {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--color-dark);
-}
-
-.logo-text span {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: var(--color-secondary);
+    width: auto;
+    object-fit: contain;
 }
 
 .nav-menu {
@@ -194,27 +166,10 @@ input, textarea, select {
     position: relative;
 }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background-color: var(--color-secondary);
-    transition: width var(--transition-base);
-}
-
 .nav-link:hover,
 .nav-link.active {
     color: var(--color-secondary);
     background-color: var(--color-light-grey);
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 80%;
 }
 
 .header-actions {
@@ -515,7 +470,7 @@ input, textarea, select {
 }
 
 .product-image::before {
-       content: '';
+    content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, rgba(47, 91, 255, 0.05) 0%, rgba(229, 57, 53, 0.05) 100%);
@@ -576,7 +531,7 @@ input, textarea, select {
    10. PRODUCT CONTENT
    ============================================ */
 .product-content {
-    padding: var(--spacing-lg);
+       padding: var(--spacing-lg);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -912,7 +867,177 @@ input, textarea, select {
 }
 
 /* ============================================
-   13. FOOTER
+   13. 3D VIEWER SECTION
+   ============================================ */
+.viewer-section {
+    padding: var(--spacing-4xl) var(--spacing-xl);
+    background-color: var(--color-white);
+}
+
+.viewer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.viewer-header {
+    text-align: center;
+    margin-bottom: var(--spacing-4xl);
+}
+
+.viewer-badge {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    background-color: rgba(47, 91, 255, 0.1);
+    color: var(--color-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-md);
+}
+
+.viewer-title {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: var(--spacing-md);
+}
+
+.viewer-subtitle {
+    font-size: 18px;
+    color: var(--color-text);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.viewer-divider {
+    width: 80px;
+    height: 4px;
+    background-color: var(--color-primary);
+    margin: var(--spacing-lg) auto 0;
+    border-radius: var(--radius-full);
+}
+
+.viewer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+.viewer-3d-container {
+    background-color: var(--color-light-grey);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.viewer-3d-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(47, 91, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+model-viewer {
+    width: 100%;
+    height: 500px;
+    background-color: var(--color-light-grey);
+    border-radius: var(--radius-xl);
+    display: block;
+}
+
+.viewer-controls {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--spacing-md);
+    z-index: 10;
+}
+
+.viewer-control-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-fast);
+}
+
+.viewer-control-btn:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    transform: scale(1.1);
+}
+
+.viewer-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.viewer-info h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.viewer-info p {
+    font-size: 16px;
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.viewer-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.viewer-feature-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background-color: var(--color-light-grey);
+    border-radius: var(--radius-lg);
+}
+
+.viewer-feature-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.viewer-feature-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.viewer-cta {
+    margin-top: var(--spacing-xl);
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+/* ============================================
+   14. FOOTER
    ============================================ */
 .footer {
     background-color: var(--color-light-grey);
@@ -1040,6 +1165,8 @@ input, textarea, select {
 .footer-contact-icon {
     width: 32px;
     height: 32px;
+       width: 32px;
+    height: 32px;
     border-radius: var(--radius-full);
     background-color: var(--color-white);
     display: flex;
@@ -1137,7 +1264,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   14. ANIMATIONS
+   15. ANIMATIONS
    ============================================ */
 @keyframes fadeInUp {
     from {
@@ -1209,7 +1336,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   15. ANIMATION CLASSES
+   16. ANIMATION CLASSES
    ============================================ */
 .animate-fade-in-up {
     animation: fadeInUp 0.6s ease-out;
@@ -1240,7 +1367,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   16. SCROLLBAR STYLING
+   17. SCROLLBAR STYLING
    ============================================ */
 ::-webkit-scrollbar {
     width: 8px;
@@ -1263,7 +1390,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   17. FOCUS VISIBLE STYLING
+   18. FOCUS VISIBLE STYLING
    ============================================ */
 :focus-visible {
     outline: 2px solid var(--color-secondary);
@@ -1271,7 +1398,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   18. UTILITY CLASSES
+   19. UTILITY CLASSES
    ============================================ */
 .text-center {
     text-align: center;
@@ -1498,7 +1625,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   19. LOADING STATES
+   20. LOADING STATES
    ============================================ */
 .product-card.loading {
     pointer-events: none;
@@ -1512,7 +1639,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   20. ERROR STATES
+   21. ERROR STATES
    ============================================ */
 .product-card.error {
     border-color: var(--color-primary);
@@ -1520,7 +1647,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   21. MODAL LOADING STATE
+   22. MODAL LOADING STATE
    ============================================ */
 .modal-overlay.loading .modal-container {
     opacity: 0.6;
@@ -1542,7 +1669,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   22. MODAL ERROR STATE
+   23. MODAL ERROR STATE
    ============================================ */
 .modal-overlay.error .modal-container {
     border-color: var(--color-primary);
@@ -1555,7 +1682,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   23. MODAL SCROLLBAR STYLING
+   24. MODAL SCROLLBAR STYLING
    ============================================ */
 .modal-container::-webkit-scrollbar {
     width: 8px;
@@ -1576,7 +1703,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   24. PRINT STYLES
+   25. PRINT STYLES
    ============================================ */
 @media print {
     .header,
@@ -1610,7 +1737,7 @@ input, textarea, select {
 }
 
 /* ============================================
-   25. PERFORMANCE OPTIMIZATION
+   26. PERFORMANCE OPTIMIZATION
    ============================================ */
 .modal-container {
     will-change: transform, opacity;
@@ -1621,13 +1748,13 @@ input, textarea, select {
 }
 
 /* ============================================
-   26. ACCESSIBILITY
+   27. ACCESSIBILITY
    ============================================ */
 body.modal-open {
     overflow: hidden;
 }
 
 /* ============================================
-   27. FINAL CLOSING
+   28. FINAL CLOSING
    ============================================ */
 /* End of Optiks Mechatronics Desktop CSS (1200px+) */
