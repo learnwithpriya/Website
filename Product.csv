@@ -1,59 +1,65 @@
-name,category,size,beam_angle,lens_type,cct,ip_rating,ik_rating,customization,description,image_path
-Round Flood Light 50W,Round Flood Lights,50W,30°,Glass Optics,3000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-50w-30.jpg
-Round Flood Light 50W,Round Flood Lights,50W,60°,Glass Optics,4000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-50w-60.jpg
-Round Flood Light 50W,Round Flood Lights,50W,90°,Glass Optics,6500K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-50w-90.jpg
-Round Flood Light 100W,Round Flood Lights,100W,30°,Glass Optics,3000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-100w-30.jpg
-Round Flood Light 100W,Round Flood Lights,100W,60°,Glass Optics,4000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-100w-60.jpg
-Round Flood Light 100W,Round Flood Lights,100W,90°,Glass Optics,6500K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-100w-90.jpg
-Round Flood Light 150W,Round Flood Lights,150W,30°,Glass Optics,3000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-150w-30.jpg
-Round Flood Light 150W,Round Flood Lights,150W,60°,Glass Optics,4000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-150w-60.jpg
-Round Flood Light 150W,Round Flood Lights,150W,90°,Glass Optics,6500K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-150w-90.jpg
-Round Flood Light 200W,Round Flood Lights,200W,30°,Glass Optics,3000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-200w-30.jpg
-Round Flood Light 200W,Round Flood Lights,200W,60°,Glass Optics,4000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-200w-60.jpg
-Round Flood Light 200W,Round Flood Lights,200W,90°,Glass Optics,6500K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-200w-90.jpg
-Linear Wall Washer 300mm,Linear Wall Washers,300mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Compact linear wall washer for accent lighting,assets/images/products/linear-wall-washer-300mm-3000k.jpg
-Linear Wall Washer 300mm,Linear Wall Washers,300mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Compact linear wall washer for accent lighting,assets/images/products/linear-wall-washer-300mm-4000k.jpg
-Linear Wall Washer 300mm,Linear Wall Washers,300mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Compact linear wall washer for accent lighting,assets/images/products/linear-wall-washer-300mm-6500k.jpg
-Linear Wall Washer 500mm,Linear Wall Washers,500mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-500mm-3000k.jpg
-Linear Wall Washer 500mm,Linear Wall Washers,500mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-500mm-4000k.jpg
-Linear Wall Washer 500mm,Linear Wall Washers,500mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-500mm-6500k.jpg
-Linear Wall Washer 600mm,Linear Wall Washers,600mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-600mm-3000k.jpg
-Linear Wall Washer 600mm,Linear Wall Washers,600mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-600mm-4000k.jpg
-Linear Wall Washer 600mm,Linear Wall Washers,600mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-600mm-6500k.jpg
-Linear Wall Washer 800mm,Linear Wall Washers,800mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Long linear wall washer for building facades,assets/images/products/linear-wall-washer-800mm-3000k.jpg
-Linear Wall Washer 800mm,Linear Wall Washers,800mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Long linear wall washer for building facades,assets/images/products/linear-wall-washer-800mm-4000k.jpg
-Linear Wall Washer 800mm,Linear Wall Washers,800mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Long linear wall washer for building facades,assets/images/products/linear-wall-washer-800mm-6500k.jpg
-Linear Wall Washer 1020mm,Linear Wall Washers,1020mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Extended linear wall washer for large facades,assets/images/products/linear-wall-washer-1020mm-3000k.jpg
-Linear Wall Washer 1020mm,Linear Wall Washers,1020mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Extended linear wall washer for large facades,assets/images/products/linear-wall-washer-1020mm-4000k.jpg
-Linear Wall Washer 1020mm,Linear Wall Washers,1020mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Extended linear wall washer for large facades,assets/images/products/linear-wall-washer-1020mm-6500k.jpg
-Linear Wall Washer 50x50,Linear Wall Washers,50x50mm,120°,Diffused Lens,3000K,IP66,IK08,Full,Compact profile wall washer,assets/images/products/linear-wall-washer-50x50-3000k.jpg
-Linear Wall Washer 50x50,Linear Wall Washers,50x50mm,120°,Diffused Lens,4000K,IP66,IK08,Full,Compact profile wall washer,assets/images/products/linear-wall-washer-50x50-4000k.jpg
-Linear Wall Washer 50x50,Linear Wall Washers,50x50mm,120°,Diffused Lens,6500K,IP66,IK08,Full,Compact profile wall washer,assets/images/products/linear-wall-washer-50x50-6500k.jpg
-Linear Wall Washer 60x60,Linear Wall Washers,60x60mm,120°,Diffused Lens,3000K,IP66,IK08,Full,Standard profile wall washer,assets/images/products/linear-wall-washer-60x60-3000k.jpg
-Linear Wall Washer 60x60,Linear Wall Washers,60x60mm,120°,Diffused Lens,4000K,IP66,IK08,Full,Standard profile wall washer,assets/images/products/linear-wall-washer-60x60-4000k.jpg
-Linear Wall Washer 60x60,Linear Wall Washers,60x60mm,120°,Diffused Lens,6500K,IP66,IK08,Full,Standard profile wall washer,assets/images/products/linear-wall-washer-60x60-6500k.jpg
-Architectural Spot Light 30W,Architectural Lighting,30W,15°,Spot Lens,3000K,IP66,IK10,Full,Precision architectural spotlight,assets/images/products/architectural-spot-light-30w-15.jpg
-Architectural Spot Light 30W,Architectural Lighting,30W,25°,Spot Lens,4000K,IP66,IK10,Full,Precision architectural spotlight,assets/images/products/architectural-spot-light-30w-25.jpg
-Architectural Spot Light 30W,Architectural Lighting,30W,36°,Spot Lens,6500K,IP66,IK10,Full,Precision architectural spotlight,assets/images/products/architectural-spot-light-30w-36.jpg
-Architectural Spot Light 50W,Architectural Lighting,50W,15°,Spot Lens,3000K,IP66,IK10,Full,High-power architectural spotlight,assets/images/products/architectural-spot-light-50w-15.jpg
-Architectural Spot Light 50W,Architectural Lighting,50W,25°,Spot Lens,4000K,IP66,IK10,Full,High-power architectural spotlight,assets/images/products/architectural-spot-light-50w-25.jpg
-Architectural Spot Light 50W,Architectural Lighting,50W,36°,Spot Lens,6500K,IP66,IK10,Full,High-power architectural spotlight,assets/images/products/architectural-spot-light-50w-36.jpg
-Architectural Wall Light 20W,Architectural Lighting,20W,90°,Wall Mount,3000K,IP66,IK08,Partial,Wall-mounted architectural lighting,assets/images/products/architectural-wall-light-20w-3000k.jpg
-Architectural Wall Light 20W,Architectural Lighting,20W,90°,Wall Mount,4000K,IP66,IK08,Partial,Wall-mounted architectural lighting,assets/images/products/architectural-wall-light-20w-4000k.jpg
-Architectural Wall Light 20W,Architectural Lighting,20W,90°,Wall Mount,6500K,IP66,IK08,Partial,Wall-mounted architectural lighting,assets/images/products/architectural-wall-light-20w-6500k.jpg
-Industrial High Bay 150W,Industrial Lighting,150W,120°,Reflector,4000K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-150w-4000k.jpg
-Industrial High Bay 150W,Industrial Lighting,150W,120°,Reflector,5700K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-150w-5700k.jpg
-Industrial High Bay 200W,Industrial Lighting,200W,120°,Reflector,4000K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-200w-4000k.jpg
-Industrial High Bay 200W,Industrial Lighting,200W,120°,Reflector,5700K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-200w-5700k.jpg
-Industrial High Bay 250W,Industrial Lighting,250W,120°,Reflector,4000K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-250w-4000k.jpg
-Industrial High Bay 250W,Industrial Lighting,250W,120°,Reflector,5700K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-250w-5700k.jpg
-LED Street Light 100W,Street Lighting,100W,140°,Optical Lens,4000K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-100w-4000k.jpg
-LED Street Light 100W,Street Lighting,100W,140°,Optical Lens,5700K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-100w-5700k.jpg
-LED Street Light 150W,Street Lighting,150W,140°,Optical Lens,4000K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-150w-4000k.jpg
-LED Street Light 150W,Street Lighting,150W,140°,Optical Lens,5700K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-150w-5700k.jpg
-LED Street Light 200W,Street Lighting,200W,140°,Optical Lens,4000K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-200w-4000k.jpg
-LED Street Light 200W,Street Lighting,200W,140°,Optical Lens,5700K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-200w-5700k.jpg
-Bollard Light 15W,Bollard Lights,15W,360°,Diffused Lens,3000K,IP67,IK10,Full,Modern bollard lighting,assets/images/products/bollard-light-15w-3000k.jpg
-Bollard Light 15W,Bollard Lights,15W,360°,Diffused Lens,4000K,IP67,IK10,Full,Modern bollard lighting,assets/images/products/bollard-light-15w-4000k.jpg
-Bollard Light 15W,Bollard Lights,15W,360°,Diffused Lens,6500K,IP67,IK10,Full,Modern bollard lighting,assets/images/products/bollard-light-15w-6500k.jpg
-Bollard Light 30W,Bollard Lights,30W,360°,Diffused Lens,3000K,IP67,IK10,Full,Modern bollard lighting,assets/images/products
+name,category,size,beam_angle,lens_type,cct,ip_rating,ik_rating,customization,description,image_path,price
+Round Flood Light 50W,Round Flood Lights,50W,30°,Glass Optics,3000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-50w-30.jpg,₹2,499
+Round Flood Light 50W,Round Flood Lights,50W,60°,Glass Optics,4000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-50w-60.jpg,₹2,499
+Round Flood Light 50W,Round Flood Lights,50W,90°,Glass Optics,6500K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-50w-90.jpg,₹2,499
+Round Flood Light 100W,Round Flood Lights,100W,30°,Glass Optics,3000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-100w-30.jpg,₹4,999
+Round Flood Light 100W,Round Flood Lights,100W,60°,Glass Optics,4000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-100w-60.jpg,₹4,999
+Round Flood Light 100W,Round Flood Lights,100W,90°,Glass Optics,6500K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-100w-90.jpg,₹4,999
+Round Flood Light 150W,Round Flood Lights,150W,30°,Glass Optics,3000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-150w-30.jpg,₹7,499
+Round Flood Light 150W,Round Flood Lights,150W,60°,Glass Optics,4000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-150w-60.jpg,₹7,499
+Round Flood Light 150W,Round Flood Lights,150W,90°,Glass Optics,6500K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-150w-90.jpg,₹7,499
+Round Flood Light 200W,Round Flood Lights,200W,30°,Glass Optics,3000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-200w-30.jpg,₹9,999
+Round Flood Light 200W,Round Flood Lights,200W,60°,Glass Optics,4000K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-200w-60.jpg,₹9,999
+Round Flood Light 200W,Round Flood Lights,200W,90°,Glass Optics,6500K,IP66,IK10,Full,High-performance round flood light with glass optics,assets/images/products/round-flood-light-200w-90.jpg,₹9,999
+Linear Wall Washer 300mm,Linear Wall Washers,300mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Compact linear wall washer for accent lighting,assets/images/products/linear-wall-washer-300mm-3000k.jpg,₹1,999
+Linear Wall Washer 300mm,Linear Wall Washers,300mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Compact linear wall washer for accent lighting,assets/images/products/linear-wall-washer-300mm-4000k.jpg,₹1,999
+Linear Wall Washer 300mm,Linear Wall Washers,300mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Compact linear wall washer for accent lighting,assets/images/products/linear-wall-washer-300mm-6500k.jpg,₹1,999
+Linear Wall Washer 500mm,Linear Wall Washers,500mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-500mm-3000k.jpg,₹2,499
+Linear Wall Washer 500mm,Linear Wall Washers,500mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-500mm-4000k.jpg,₹2,499
+Linear Wall Washer 500mm,Linear Wall Washers,500mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-500mm-6500k.jpg,₹2,499
+Linear Wall Washer 600mm,Linear Wall Washers,600mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-600mm-3000k.jpg,₹2,999
+Linear Wall Washer 600mm,Linear Wall Washers,600mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-600mm-4000k.jpg,₹2,999
+Linear Wall Washer 600mm,Linear Wall Washers,600mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Medium linear wall washer for architectural lighting,assets/images/products/linear-wall-washer-600mm-6500k.jpg,₹2,999
+Linear Wall Washer 800mm,Linear Wall Washers,800mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Long linear wall washer for building facades,assets/images/products/linear-wall-washer-800mm-3000k.jpg,₹3,499
+Linear Wall Washer 800mm,Linear Wall Washers,800mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Long linear wall washer for building facades,assets/images/products/linear-wall-washer-800mm-4000k.jpg,₹3,499
+Linear Wall Washer 800mm,Linear Wall Washers,800mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Long linear wall washer for building facades,assets/images/products/linear-wall-washer-800mm-6500k.jpg,₹3,499
+Linear Wall Washer 1020mm,Linear Wall Washers,1020mm,120°,Diffused Lens,3000K,IP66,IK08,Partial,Extended linear wall washer for large facades,assets/images/products/linear-wall-washer-1020mm-3000k.jpg,₹3,999
+Linear Wall Washer 1020mm,Linear Wall Washers,1020mm,120°,Diffused Lens,4000K,IP66,IK08,Partial,Extended linear wall washer for large facades,assets/images/products/linear-wall-washer-1020mm-4000k.jpg,₹3,999
+Linear Wall Washer 1020mm,Linear Wall Washers,1020mm,120°,Diffused Lens,6500K,IP66,IK08,Partial,Extended linear wall washer for large facades,assets/images/products/linear-wall-washer-1020mm-6500k.jpg,₹3,999
+Linear Wall Washer 50x50,Linear Wall Washers,50x50mm,120°,Diffused Lens,3000K,IP66,IK08,Full,Compact profile wall washer,assets/images/products/linear-wall-washer-50x50-3000k.jpg,₹1,499
+Linear Wall Washer 50x50,Linear Wall Washers,50x50mm,120°,Diffused Lens,4000K,IP66,IK08,Full,Compact profile wall washer,assets/images/products/linear-wall-washer-50x50-4000k.jpg,₹1,499
+Linear Wall Washer 50x50,Linear Wall Washers,50x50mm,120°,Diffused Lens,6500K,IP66,IK08,Full,Compact profile wall washer,assets/images/products/linear-wall-washer-50x50-6500k.jpg,₹1,499
+Linear Wall Washer 60x60,Linear Wall Washers,60x60mm,120°,Diffused Lens,3000K,IP66,IK08,Full,Standard profile wall washer,assets/images/products/linear-wall-washer-60x60-3000k.jpg,₹1,799
+Linear Wall Washer 60x60,Linear Wall Washers,60x60mm,120°,Diffused Lens,4000K,IP66,IK08,Full,Standard profile wall washer,assets/images/products/linear-wall-washer-60x60-4000k.jpg,₹1,799
+Linear Wall Washer 60x60,Linear Wall Washers,60x60mm,120°,Diffused Lens,6500K,IP66,IK08,Full,Standard profile wall washer,assets/images/products/linear-wall-washer-60x60-6500k.jpg,₹1,799
+Architectural Spot Light 30W,Architectural Lighting,30W,15°,Spot Lens,3000K,IP66,IK10,Full,Precision architectural spotlight,assets/images/products/architectural-spot-light-30w-15.jpg,₹3,299
+Architectural Spot Light 30W,Architectural Lighting,30W,25°,Spot Lens,4000K,IP66,IK10,Full,Precision architectural spotlight,assets/images/products/architectural-spot-light-30w-25.jpg,₹3,299
+Architectural Spot Light 30W,Architectural Lighting,30W,36°,Spot Lens,6500K,IP66,IK10,Full,Precision architectural spotlight,assets/images/products/architectural-spot-light-30w-36.jpg,₹3,299
+Architectural Spot Light 50W,Architectural Lighting,50W,15°,Spot Lens,3000K,IP66,IK10,Full,High-power architectural spotlight,assets/images/products/architectural-spot-light-50w-15.jpg,₹4,499
+Architectural Spot Light 50W,Architectural Lighting,50W,25°,Spot Lens,4000K,IP66,IK10,Full,High-power architectural spotlight,assets/images/products/architectural-spot-light-50w-25.jpg,₹4,499
+Architectural Spot Light 50W,Architectural Lighting,50W,36°,Spot Lens,6500K,IP66,IK10,Full,High-power architectural spotlight,assets/images/products/architectural-spot-light-50w-36.jpg,₹4,499
+Architectural Wall Light 20W,Architectural Lighting,20W,90°,Wall Mount,3000K,IP66,IK08,Partial,Wall-mounted architectural lighting,assets/images/products/architectural-wall-light-20w-3000k.jpg,₹2,199
+Architectural Wall Light 20W,Architectural Lighting,20W,90°,Wall Mount,4000K,IP66,IK08,Partial,Wall-mounted architectural lighting,assets/images/products/architectural-wall-light-20w-4000k.jpg,₹2,199
+Architectural Wall Light 20W,Architectural Lighting,20W,90°,Wall Mount,6500K,IP66,IK08,Partial,Wall-mounted architectural lighting,assets/images/products/architectural-wall-light-20w-6500k.jpg,₹2,199
+Industrial High Bay 150W,Industrial Lighting,150W,120°,Reflector,4000K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-150w-4000k.jpg,₹8,999
+Industrial High Bay 150W,Industrial Lighting,150W,120°,Reflector,5700K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-150w-5700k.jpg,₹8,999
+Industrial High Bay 200W,Industrial Lighting,200W,120°,Reflector,4000K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-200w-4000k.jpg,₹11,999
+Industrial High Bay 200W,Industrial Lighting,200W,120°,Reflector,5700K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-200w-5700k.jpg,₹11,999
+Industrial High Bay 250W,Industrial Lighting,250W,120°,Reflector,4000K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-250w-4000k.jpg,₹14,999
+Industrial High Bay 250W,Industrial Lighting,250W,120°,Reflector,5700K,IP66,IK10,Full,High-bay industrial lighting,assets/images/products/industrial-high-bay-250w-5700k.jpg,₹14,999
+LED Street Light 100W,Street Lighting,100W,140°,Optical Lens,4000K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-100w-4000k.jpg,₹6,999
+LED Street Light 100W,Street Lighting,100W,140°,Optical Lens,5700K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-100w-5700k.jpg,₹6,999
+LED Street Light 150W,Street Lighting,150W,140°,Optical Lens,4000K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-150w-4000k.jpg,₹9,999
+LED Street Light 150W,Street Lighting,150W,140°,Optical Lens,5700K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-150w-5700k.jpg,₹9,999
+LED Street Light 200W,Street Lighting,200W,140°,Optical Lens,4000K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-200w-4000k.jpg,₹12,999
+LED Street Light 200W,Street Lighting,200W,140°,Optical Lens,5700K,IP66,IK10,Full,Smart street lighting system,assets/images/products/led-street-light-200w-5700k.jpg,₹12,999
+Bollard Light 15W,Bollard Lights,15W,360°,Diffused Lens,3000K,IP67,IK10,Full,Modern bollard lighting,assets/images/products/bollard-light-15w-3000k.jpg,₹1,299
+Bollard Light 15W,Bollard Lights,15W,360°,Diffused Lens,4000K,IP67,IK10,Full,Modern bollard lighting,assets/images/products/bollard-light-15w-4000k.jpg,₹1,299
+Bollard Light 15W,Bollard Lights,15W,360°,Diffused Lens,6500K,IP67,IK10,Full,Modern bollard lighting,assets/images/products/bollard-light-15w-6500k.jpg,₹1,299
+Bollard Light 30W,Bollard Lights,30W,360°,Diffused Lens,3000K,IP67,IK10,Full,Modern bollard lighting,assets/images/products/bollard-light-30w-3000k.jpg,₹1,799
+Bollard Light 30W,Bollard Lights,30W,360°,Diffused Lens,4000K,IP67,IK10,Full,Modern bollard lighting,assets/images/products/bollard-light-30w-4000k.jpg,₹1,799
+Bollard Light 30W,Bollard Lights,30W,360°,Diffused Lens,6500K,IP67,IK10,Full,Modern bollard lighting,assets/images/products/bollard-light-30w-6500k.jpg,₹1,799
+Underwater Light 50W,Underwater Lighting,50W,120°,Glass Lens,3000K,IP68,IK10,Full,Submersible underwater lighting,assets/images/products/underwater-light-50w-3000k.jpg,₹4,999
+Underwater Light 50W,Underwater Lighting,50W,120°,Glass Lens,4000K,IP68,IK10,Full,Submersible underwater lighting,assets/images/products/underwater-light-50w-4000k.jpg,₹4,999
+Underwater Light 100W,Underwater Lighting,100W,120°,Glass Lens,3000K,IP68,IK10,Full,Submersible underwater lighting,assets/images/products/underwater-light-100w-3000k.jpg,₹7,999
+Underwater Light 100W,Underwater Lighting,100W,120°,Glass Lens,4000K,IP68,IK10,Full,Submersible underwater lighting,assets/images/products/underwater-light-100w-4000k.jpg,₹7,999
